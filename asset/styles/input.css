@@ -21,8 +21,8 @@
   --color-hover: #e8973e;
 }
 
-@layer utilities{
+/* @layer utilities{
     .container{
         @apply max-w-6xl mx-auto px-6
     }
-}
+} */
