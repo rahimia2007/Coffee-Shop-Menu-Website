@@ -1,0 +1,28 @@
+# Node dependencies (اگر از npm برای نصب تيلوند استفاده می‌کنی)
+node_modules/
+.pnpm-store/
+jspm_packages/
+web_modules/
+
+# Build outputs (پوشه خروجی نهایی کدهای بهینه‌سازی شده)
+dist/
+build/
+out/
+
+# Local/Secret env files (اگر در آینده متغیرهای محیطی حساس اضافه کردی)
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files (تنظیمات ادیتور شما که نباید روی گیت‌هاب بره)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# OS Files (فایل‌های موقت سیستم‌عامل)
+.DS_Store
+Thumbs.db

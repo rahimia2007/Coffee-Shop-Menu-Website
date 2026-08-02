@@ -1,0 +1,28 @@
+/* Google fonts */
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-Playfair: "Playfair Display", serif;
+  --font-dmsans: "DM Sans", sans-serif;
+  --font-dmmono: "DM Mono", monospace;
+
+  /* Colors */
+  --color-background: #0d0d0d;
+  --color-cards: #161210;
+  --color-elevated-cards: #1f1a16;
+  --color-border: rgba(193, 122, 58, 0.14);
+  --color-primary: #c17a3a;
+  --color-primary-text: #ede5d0;
+  --color-secondary-text: #c4b49a;
+  --color-placeholders: #8a7a6a;
+  --color-hover: #e8973e;
+}
+
+@layer utilities{
+    .container{
+        @apply max-w-6xl mx-auto px-6
+    }
+}
