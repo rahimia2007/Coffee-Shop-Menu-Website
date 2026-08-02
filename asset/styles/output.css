@@ -8,11 +8,13 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-green-500: oklch(72.3% 0.219 149.579);
     --spacing: 0.25rem;
     --container-6xl: 72rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --font-dmsans: "DM Sans", sans-serif;
+    --color-background: #0d0d0d;
+    --color-primary-text: #ede5d0;
   }
 }
 @layer base {
@@ -164,6 +166,15 @@
   }
 }
 @layer utilities {
+  .bg-background {
+    background-color: var(--color-background);
+  }
+  .font-dmsans {
+    font-family: var(--font-dmsans);
+  }
+  .text-primary-text {
+    color: var(--color-primary-text);
+  }
   .container {
     margin-inline: auto;
     max-width: var(--container-6xl);
