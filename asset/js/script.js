@@ -5,9 +5,8 @@ menuToggle.addEventListener("click", function () {
   if (mobileNav.className.includes("opacity-0")) {
     mobileNav.classList.remove("opacity-0");
     mobileNav.classList.add("opacity-100");
-    
     mobileNav.classList.remove("h-0");
-    mobileNav.classList.add("h-40");
+    mobileNav.classList.add("h-[164px]");
     menuToggle.innerHTML = `
         <svg
         xmlns="http://www.w3.org/2000/svg" 
@@ -27,9 +26,9 @@ menuToggle.addEventListener("click", function () {
   } else {
     mobileNav.classList.add("opacity-0");
     mobileNav.classList.remove("opacity-100");
-    mobileNav.classList.remove("h-40");
+    mobileNav.classList.remove("h-[164px]");
     mobileNav.classList.add("h-0");
-    
+
     menuToggle.innerHTML = `
         <svg
         xmlns="http://www.w3.org/2000/svg"

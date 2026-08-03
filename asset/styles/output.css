@@ -255,6 +255,12 @@
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
+  .h-\[164\] {
+    height: 164;
+  }
+  .h-\[164px\] {
+    height: 164px;
+  }
   .h-full {
     height: 100%;
   }
