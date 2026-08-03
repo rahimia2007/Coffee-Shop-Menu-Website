@@ -1,20 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Tailwind link -->
-    <link href="./asset/styles/output.css" rel="stylesheet">
+    <link href="./asset/styles/output.css" rel="stylesheet" />
     <title>Ember & Oak</title>
-</head>
-<body class="bg-background text-primary-text font-dmsans">
-    
-    
+  </head>
+  <body class="bg-background text-primary-text font-dmsans">
+    <!-- HEADER -->
+    <header
+      class="fixed top-0 inset-x-0 z-40 border-b border-primary/15 bg-background/90 backdrop:blur-[14px] h-16"
+    >
+      <div class="container flex items-center justify-between h-full">
+        <!-- LOGO -->
+        <div
+          class="flex items-center gap-2.5 hover:opacity-75 transition-opacity cursor-pointer"
+        >
+          <div
+            class="size-7 rounded-lg flex items-center justify-center bg-primary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-coffee w-4 h-4 text-background"
+              data-fg-d3bl10=":0:node_modules/lucide-react:297:15:9398:59:e:Coffee::::::DRXG"
+              data-fgid-d3bl10=":r6:"
+            >
+              <path d="M10 2v2"></path>
+              <path d="M14 2v2"></path>
+              <path
+                d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"
+              ></path>
+              <path d="M6 2v2"></path>
+            </svg>
+          </div>
+          <span class="text-lg font-Playfair font-bold tracking-tigh"
+            >Ember & Oak</span
+          >
+        </div>
 
+        <!-- Nav Menu -->
+        <nav class="hidden md:block">
+          <ul class="md:flex items-center gap-8">
+            <li>
+              <a
+                class="text-sm tracking-wide transition-colors text-primary cursor-pointer"
+                href="./index.html"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-sm tracking-wide transition-colors hover:text-primary cursor-pointer"
+                href="#"
+                >Menu</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-sm tracking-wide transition-colors hover:text-primary cursor-pointer"
+                href="#"
+                >Our Story</a
+              >
+            </li>
+          </ul>
+        </nav>
 
+        <!-- Buttons -->
+        <div class="flex items-center justify-center gap-3">
+          <!-- Cart BTN -->
+          <div
+            class="flex items-center justify-center bg-primary text-background gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-shopping-cart w-4 h-4 text-background"
+              data-fg-d3bl22="0.8:48.20003:node_modules/lucide-react:326:15:10553:36:e:ShoppingCart::::::BPYc"
+              data-fgid-d3bl22=":re:"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
+            <span class="hidden sm:block">Cart</span>
+          </div>
 
-     
+          <!-- Menu Mobile Toggle -->
+          <div
+            class="md:hidden size-9 flex items-center justify-center text-secondary-text rounded-xl border border-primary/14 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-menu w-4 h-4"
+              data-fg-d3bl32="0.8:48.20003:node_modules/lucide-react:345:57:11421:28:e:Menu::::::D5X5"
+              data-fgid-d3bl32=":rh:"
+            >
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+
+        
+      </div>
+    </header>
+
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>

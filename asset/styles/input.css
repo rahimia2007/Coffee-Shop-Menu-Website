@@ -21,8 +21,12 @@
   --color-hover: #e8973e;
 }
 
-/* @layer utilities{
-    .container{
-        @apply max-w-6xl mx-auto px-6
-    }
-} */
+@layer utilities {
+  .container {
+    @apply max-w-6xl mx-auto px-6;
+  }
+  .p {
+    border-color: #c17a3a;
+    color: #c4b49a;
+  }
+}
