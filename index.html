@@ -50,7 +50,7 @@
 
         <!-- Nav Menu -->
         <nav class="hidden md:block">
-          <ul class="md:flex items-center gap-8">
+          <ul class="flex items-center gap-8">
             <li>
               <a
                 class="text-sm tracking-wide transition-colors text-primary cursor-pointer"
@@ -106,7 +106,8 @@
 
           <!-- Menu Mobile Toggle -->
           <div
-            class="md:hidden size-9 flex items-center justify-center text-secondary-text rounded-xl border border-primary/14 transition-colors"
+            id="menu-toggle"
+            class="md:hidden size-9 flex items-center justify-center text-secondary-text rounded-xl border border-primary/14 transition-colors cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -129,10 +130,48 @@
           </div>
         </div>
 
-        
+        <!-- Mobile Nav Menu -->
+        <nav
+          id="mobile-nav"
+          class="fixed top-16 inset-x-0 px-6 py-4 md:hidden border-b border-primary/15 h-0 opacity-0 overflow-hidden transition-all duration-300"
+          
+        >
+          <ul class="flex flex-col gap-2">
+            <li
+              class="flex items-center justify-between px-4 py-3 transition-all text-primary bg-primary/5 rounded-xl cursor-pointer"
+            >
+              <a
+                class="w-full block text-left text-sm tracking-wide"
+                href="./index.html"
+                >Home</a
+              >
+              <span class="w-1.5 h-1.5 rounded-full bg-primary block"></span>
+            </li>
+            <li
+              class="flex items-center justify-between px-4 py-3 transition-all duration-300 text-secondary-text hover:text-primary hover:bg-primary/5 rounded-xl group cursor-pointer"
+            >
+              <a class="w-full block text-left text-sm tracking-wide" href="#"
+                >Menu</a
+              >
+              <span
+                class="w-1.5 h-1.5 rounded-full bg-primary hidden group-hover:block"
+              ></span>
+            </li>
+            <li
+              class="flex items-center justify-between px-4 py-3 transition-all duration-300 text-secondary-text hover:text-primary hover:bg-primary/5 rounded-xl group cursor-pointer"
+            >
+              <a class="w-full block text-left text-sm tracking-wide" href="#"
+                >Our Story</a
+              >
+              <span
+                class="w-1.5 h-1.5 rounded-full bg-primary hidden group-hover:block"
+              ></span>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
 
-    <script src="./script.js"></script>
+    <script src="./asset/js/script.js"></script>
   </body>
 </html>
