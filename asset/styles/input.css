@@ -26,7 +26,6 @@
     @apply max-w-6xl mx-auto px-6;
   }
   .p {
-    background: linear-gradient(transparent, #ede5d0);
+    color: #c4b49a;
   }
 }
-
