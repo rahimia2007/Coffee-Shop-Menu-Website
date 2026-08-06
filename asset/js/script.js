@@ -6,7 +6,7 @@ menuToggle.addEventListener("click", function () {
     mobileNav.classList.remove("opacity-0");
     mobileNav.classList.add("opacity-100");
     mobileNav.classList.remove("h-0");
-    mobileNav.classList.add("h-[164px]");
+    mobileNav.classList.add("h-[180px]");
 
     menuToggle.innerHTML = "";
     menuToggle.innerHTML = `<i data-lucide="x" class="w-4 h-4"></i>`;
