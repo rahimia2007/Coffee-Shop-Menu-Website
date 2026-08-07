@@ -26,6 +26,8 @@
     @apply max-w-6xl mx-auto px-6;
   }
   .p {
-    color: #c4b49a;
+    background: #c17a3a;
+    color: #c17a3a;
+    border: 1px solid #c17a3a;
   }
 }
