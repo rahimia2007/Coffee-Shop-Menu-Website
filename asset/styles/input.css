@@ -19,6 +19,9 @@
   --color-secondary-text: #c4b49a;
   --color-placeholders: #8a7a6a;
   --color-hover: #e8973e;
+
+  /* Shadow */
+  --about-shadow: rgb(248, 113, 113) 0px 0px 8px;
 }
 
 @layer utilities {
@@ -26,6 +29,6 @@
     @apply max-w-6xl mx-auto px-6;
   }
   .p {
-    color: #ede5d0;
+    color: #c4b49a;
   }
 }
