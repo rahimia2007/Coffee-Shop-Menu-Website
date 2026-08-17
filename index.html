@@ -927,6 +927,194 @@
       </div>
     </div>
 
+    <!-- Shopping Cart -->
+    <div>
+      <div
+        class="fixed z-60 w-full max-w-md inset-y-0 right-0 flex flex-col bg-elevated-cards border-l border-primary/15 transition-transform duration-300 ease-out translate-x-0"
+      >
+        <div
+          class="flex items-center justify-between px-5 py-4 border-b border-primary/15"
+        >
+          <h2 class="text-xl font-bold font-Playfair text-primary-text">
+            Your Orders
+          </h2>
+          <button
+            class="w-8 h-8 rounded-full flex items-center justify-center border border-primary/15 transition-all hover:border-amber-600/40 text-secondary-text cursor-pointer"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="flex gap-2 px-4 py-3 border-b border-primary/15 shrink-0">
+          <button
+            class="flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-primary text-background"
+          >
+            Current Order
+          </button>
+          <button
+            class="flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text"
+          >
+            Past Orders
+          </button>
+        </div>
+
+        <!-- Past Orders -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-2 hidden">
+          <!-- Open -->
+          <div class="rounded-xl border border-primary/15 bg-cards">
+            <div class="w-full flex items-center justify-between p-4 text-left">
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span
+                    class="text-sm font-dmmono font-semibold text-primary-text"
+                    >ORD-2847</span
+                  >
+                  <span
+                    class="text-xs px-2 py-0.5 rounded-full font-medium font-dmmono bg-[#4ade80]/13 text-[#4ade80]"
+                    >Delivered</span
+                  >
+                </div>
+                <p class="text-xs text-placeholders">July 28, 2026</p>
+              </div>
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="font-dmmono text-sm font-bold text-primary"
+                  >$13.00</span
+                >
+                <i
+                  data-lucide="chevron-down"
+                  class="w-4 h-4 text-placeholders"
+                ></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Close -->
+          <div class="rounded-xl border border-primary/15 bg-cards">
+            <div class="w-full flex items-center justify-between p-4 text-lefl">
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span
+                    class="text-sm font-dmmono font-semibold text-primary-text"
+                    >ORD-2847</span
+                  >
+                  <span
+                    class="text-xs px-2 py-0.5 rounded-full font-medium font-dmmono bg-[#4ade80]/13 text-[#4ade80]"
+                    >Delivered</span
+                  >
+                </div>
+                <p class="text-xs text-placeholders">July 28, 2026</p>
+              </div>
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="font-dmmono text-sm font-bold text-primary"
+                  >$13.00</span
+                >
+                <i
+                  data-lucide="chevron-down"
+                  class="w-4 h-4 text-placeholders"
+                ></i>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-3 border-t text-primary/15">
+              <div class="space-y-1.5 mb-4">
+                <div class="flex justify-between text-xs">
+                  <span class="text-secondary-text">2× Espresso Romano</span>
+                  <span class="font-dmmono text-primary-text">$9.00</span>
+                </div>
+                <div class="flex justify-between text-xs">
+                  <span class="text-secondary-text">2× Espresso Romano</span>
+                  <span class="font-dmmono text-primary-text">$9.00</span>
+                </div>
+              </div>
+              <button
+                class="w-full py-2 rounded-xl text-xs font-semibold transition-all hover:opacity-80 bg-primary/13 text-primary border border-primary"
+              >
+                Reorder
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Current Order -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-3">
+          <div class="rounded-xl p-4 border border-primary/15 bg-cards">
+            <div class="flex gap-3 mb-3">
+              <img
+                class="size-12 rounded-lg object-cover shrink-0 bg-[#3c3028]"
+                src="./asset/img/espresso.jpg"
+                alt=""
+              />
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium truncate text-primary-text">
+                  Cortado
+                </h4>
+                <span class="text-xs mt-0.5 text-secondary-text">Regular </span>
+              </div>
+              <span class="font-dmmono text-sm font-bold shrink-0 text-primary"
+                >$6.50</span
+              >
+            </div>
+
+            <div class="flex items-center gap-2">
+              <div
+                class="flex items-center gap-1.5 rounded-lg px-1 bg-elevated-cards"
+              >
+                <button
+                  class="w-6 h-6 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
+                >
+                  <i data-lucide="plus" class="w-3 h-3"></i>
+                </button>
+                <span
+                  class="font-dmmono text-xs font-bold w-3 text-center text-primary-text"
+                  >1</span
+                >
+                <button
+                  class="w-6 h-6 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
+                >
+                  <i data-lucide="minus" class="w-3 h-3"></i>
+                </button>
+              </div>
+              <input
+                class="flex-1 text-xs rounded-lg px-2.5 py-1.5 bg-elevated-cards text-primary-text outline-none border border-primary/15 transition-colors focus:border-amber-600/50 placeholder:opacity-40"
+                type="text"
+                placeholder='Note, e.g. "Extra hot"'
+              />
+              <button
+                class="w-6 h-6 flex items-center justify-center text-placeholders transition-opacity hover:opacity-60 cursor-pointer"
+              >
+                <i data-lucide="x" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price Total -->
+        <div class="p-5 border-t border-primary/15 shrink-0">
+          <div class="space-y-1.5 mb-4">
+            <div class="flex justify-between text-sm text-secondary-text">
+              <span>Subtotal</span>
+              <span class="font-dmmono">$4.50</span>
+            </div>
+            <div class="flex justify-between text-sm text-secondary-text">
+              <span>Tax (8.75%)</span>
+              <span class="font-dmmono">$0.39</span>
+            </div>
+            <div
+              class="flex justify-between text-sm font-semibold pt-2.5 mt-2 border-t border-primary/15 text-primary-text"
+            >
+              <span>Total</span>
+              <span class="font-dmmono text-primary">$4.89</span>
+            </div>
+          </div>
+          <button
+            class="w-full py-3.5 rounded-xl font-semibold text-sm bg-primary text-background transition-all hover:opacity-90 active:scale-95 cursor-pointer"
+          >
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
+      <div class="fixed inset-0 z-40 bg-black/70 backdrop-blur-xs"></div>
+    </div>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>
