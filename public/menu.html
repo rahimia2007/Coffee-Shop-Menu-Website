@@ -183,6 +183,133 @@
       </div>
     </footer>
 
+    <!-- Product Page Modal -->
+    <div class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden">
+      <div class="absolute inset-0 bg-background/82 backdrop-blur-sm"></div>
+
+      <div
+        class="relative z-10 rounded-3xl overflow-x-hidden w-full max-w-2xl max-h-[92vh] border border-primary/22 bg-elevated-cards"
+      >
+        <div class="relative h-64 md:h-80 bg-cards">
+          <img
+            class="w-full h-full object-cover"
+            src="../asset/img/espresso.jpg"
+            alt=""
+          />
+          <div
+            class="absolute inset-0 bg-linear-to-b from-transparent to-elevated-cards"
+          ></div>
+          <span
+            class="absolute top-4 left-4 text-xs text-background bg-primary font-dmmono px-2.5 py-1 rounded-full font-medium"
+            >Best Seller</span
+          >
+          <button
+            class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center border border-white/20 text-white bg-background/65 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer"
+          >
+            <i data-lucide="x" class="w-4 h-4 text-white"></i>
+          </button>
+        </div>
+
+        <div class="p-6 md:p-7">
+          <div class="flex justify-between items-start mb-3">
+            <h3
+              class="text-3xl text-primary-text font-Playfair font-bold leading-tight"
+            >
+              Espresso Romano
+            </h3>
+            <span
+              class="font-dmmono text-xl text-primary font-bold shrink-0 ml-4"
+              >$4.50</span
+            >
+          </div>
+
+          <p class="text-sm text-secondary-text leading-relaxed mb-7">
+            A bold shot of single-origin espresso with a twist of lemon zest.
+            Bright, clean, and intensely aromatic.
+          </p>
+
+          <div class="mb-5">
+            <span
+              class="text-xs text-placeholders font-dmmono uppercase tracking-wider mb-2.5 block"
+              >Size</span
+            >
+            <div class="grid grid-cols-3 gap-2">
+              <button
+                class="py-2.5 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text cursor-pointer"
+              >
+                Small
+              </button>
+              <button
+                class="py-2.5 rounded-xl text-sm font-medium transition-all bg-primary text-background cursor-pointer"
+              >
+                Regular
+              </button>
+              <button
+                class="py-2.5 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text cursor-pointer"
+              >
+                Large
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-7">
+            <span
+              class="text-xs text-placeholders font-dmmono uppercase tracking-wider mb-2.5 block"
+              >Sugar</span
+            >
+            <div class="grid grid-cols-4 gap-2">
+              <button
+                class="py-2 rounded-xl text-xs font-medium transition-all bg-cards text-secondary-text cursor-pointer"
+              >
+                None
+              </button>
+              <button
+                class="py-2 rounded-xl text-xs font-medium transition-all bg-cards text-secondary-text cursor-pointer"
+              >
+                Half
+              </button>
+              <button
+                class="py-2 rounded-xl text-xs font-medium transition-all bg-primary/15 text-hover border border-primary cursor-pointer"
+              >
+                Standard
+              </button>
+              <button
+                class="py-2 rounded-xl text-xs font-medium transition-all bg-cards text-secondary-text cursor-pointer"
+              >
+                Extra
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3 rounded-xl px-1.5 bg-cards">
+              <button
+                class="w-8 h-10 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
+              >
+                <i data-lucide="minus" class="w-3.5 h-3.5"></i>
+              </button>
+              <span
+                class="font-mono text-sm font-bold w-4 text-center text-primary-text"
+                >1</span
+              >
+              <button
+                class="w-8 h-10 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
+              >
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <button
+              class="flex-1 py-3.5 rounded-xl font-semibold text-sm transition-all hover:opacity-90 active:scale-95 bg-primary text-background"
+            >
+              Add to Cart · $
+              <span>5.00</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>
