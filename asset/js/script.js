@@ -14,6 +14,7 @@ const currentOrderBtn = document.getElementById("current-order-btn");
 const pastOrdersBtn = document.getElementById("past-orders-btn");
 const pastOrdersContent = document.getElementById("past-orders-content");
 const currentOrderContent = document.getElementById("current-order-content");
+const priceTotalContent = document.getElementById("price-total-content");
 
 function showMenu() {
   if (mobileNav.className.includes("opacity-0")) {
@@ -69,6 +70,7 @@ function hideShoppingCartModal() {
 function showCurrentOrder() {
   pastOrdersContent.classList.add("hidden");
   currentOrderContent.classList.remove("hidden");
+  priceTotalContent.classList.remove("hidden");
   currentOrderBtn.className =
     "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-primary text-background";
   pastOrdersBtn.className =
@@ -78,6 +80,7 @@ function showCurrentOrder() {
 function showPastOrders() {
   pastOrdersContent.classList.remove("hidden");
   currentOrderContent.classList.add("hidden");
+  priceTotalContent.classList.add("hidden");
   pastOrdersBtn.className =
     "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-primary text-background";
   currentOrderBtn.className =
