@@ -1,9 +1,15 @@
 const menuToggle = document.getElementById("menu-toggle");
 const mobileNav = document.getElementById("mobile-nav");
 
-const productCarts = document.querySelectorAll("#product-cart");
+const productCards = document.querySelectorAll("#product-card");
 const productModal = document.getElementById("product-modal");
 const productModalCloseBtn = document.getElementById("product-modal-close");
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const shoppingCartModal = document.getElementById("shopping-cart-modal");
+const shoppingCartContent = document.getElementById("shopping-cart-content");
+const shoppingCartCloseBtn = document.getElementById("shopping-cart-close-btn");
+
 function showMenu() {
   if (mobileNav.className.includes("opacity-0")) {
     mobileNav.classList.remove("opacity-0");
@@ -41,8 +47,24 @@ function hideProductModal() {
   productModal.classList.add("hidden");
 }
 
+function showShoppingCartModal() {
+  shoppingCartModal.classList.remove("invisible");
+  shoppingCartModal.classList.remove("pointer-events-none");
+  shoppingCartContent.classList.remove("translate-x-full");
+  shoppingCartContent.classList.add("translate-x-0");
+}
+
+function hideShoppingCartModal() {
+  shoppingCartModal.classList.add("invisible");
+  shoppingCartModal.classList.add("pointer-events-none");
+  shoppingCartContent.classList.remove("translate-x-0");
+  shoppingCartContent.classList.add("translate-x-full");
+}
+
 menuToggle.addEventListener("click", showMenu);
-productCarts.forEach(function (productCart) {
-  productCart.addEventListener("click", showProductModal);
+productCards.forEach(function (productCard) {
+  productCard.addEventListener("click", showProductModal);
 });
 productModalCloseBtn.addEventListener("click", hideProductModal);
+openCartBtn.addEventListener("click", showShoppingCartModal);
+shoppingCartCloseBtn.addEventListener("click", hideShoppingCartModal);

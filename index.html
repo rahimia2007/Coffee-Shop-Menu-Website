@@ -59,6 +59,7 @@
         <div class="flex items-center justify-center gap-3">
           <!-- Cart BTN -->
           <div
+            id="open-cart-btn"
             class="flex items-center justify-center bg-primary text-background gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
           >
             <i data-lucide="shopping-cart" class="w-4 h-4 text-background"></i>
@@ -326,7 +327,7 @@
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div
-              id="product-cart"
+              id="product-card"
               class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div class="relative overflow-hidden h-52">
@@ -373,7 +374,7 @@
             </div>
 
             <div
-              id="product-cart"
+              id="product-card"
               class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div class="relative overflow-hidden h-52">
@@ -420,7 +421,7 @@
             </div>
 
             <div
-              id="product-cart"
+              id="product-card"
               class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div class="relative overflow-hidden h-52">
@@ -467,7 +468,7 @@
             </div>
 
             <div
-              id="product-cart"
+              id="product-card"
               class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div class="relative overflow-hidden h-52">
@@ -832,7 +833,7 @@
             >Best Seller</span
           >
           <button
-          id="product-modal-close"
+            id="product-modal-close"
             class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center border border-white/20 text-white bg-background/65 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer"
           >
             <i data-lucide="x" class="w-4 h-4 text-white"></i>
@@ -940,9 +941,10 @@
     </div>
 
     <!-- Shopping Cart -->
-    <div class="hidden">
+    <div class="invisible pointer-events-none" id="shopping-cart-modal">
       <div
-        class="fixed z-60 w-full max-w-md inset-y-0 right-0 flex flex-col bg-elevated-cards border-l border-primary/15 transition-transform duration-300 ease-out translate-x-0"
+        id="shopping-cart-content"
+        class="fixed z-60 w-full max-w-md inset-y-0 right-0 flex flex-col bg-elevated-cards border-l border-primary/15 transition-all duration-300 ease-out translate-x-full"
       >
         <div
           class="flex items-center justify-between px-5 py-4 border-b border-primary/15"
@@ -951,6 +953,7 @@
             Your Orders
           </h2>
           <button
+            id="shopping-cart-close-btn"
             class="w-8 h-8 rounded-full flex items-center justify-center border border-primary/15 transition-all hover:border-amber-600/40 text-secondary-text cursor-pointer"
           >
             <i data-lucide="x" class="w-4 h-4"></i>
