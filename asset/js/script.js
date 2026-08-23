@@ -1,6 +1,10 @@
 const menuToggle = document.getElementById("menu-toggle");
 const mobileNav = document.getElementById("mobile-nav");
 
+const productCarts = document.querySelectorAll("#product-cart");
+const productModal = document.getElementById("product-modal");
+const productModalCloseBtn = document.getElementById("product-modal-close");
+
 menuToggle.addEventListener("click", function () {
   if (mobileNav.className.includes("opacity-0")) {
     mobileNav.classList.remove("opacity-0");
@@ -29,3 +33,16 @@ menuToggle.addEventListener("click", function () {
     lucide.createIcons();
   }
 });
+
+function showProductModal() {
+  productModal.classList.remove("hidden");
+}
+
+function hideProductModal() {
+  productModal.classList.add("hidden");
+}
+
+productCarts.forEach(function (productCart) {
+  productCart.addEventListener("click", showProductModal);
+});
+productModalCloseBtn.addEventListener("click", hideProductModal);

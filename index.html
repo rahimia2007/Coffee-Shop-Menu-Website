@@ -326,6 +326,7 @@
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div
+              id="product-cart"
               class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div class="relative overflow-hidden h-52">
@@ -372,6 +373,7 @@
             </div>
 
             <div
+              id="product-cart"
               class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div class="relative overflow-hidden h-52">
@@ -418,6 +420,7 @@
             </div>
 
             <div
+              id="product-cart"
               class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div class="relative overflow-hidden h-52">
@@ -464,6 +467,7 @@
             </div>
 
             <div
+              id="product-cart"
               class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div class="relative overflow-hidden h-52">
@@ -805,7 +809,10 @@
     </footer>
 
     <!-- Product Page Modal -->
-    <div class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden">
+    <div
+      id="product-modal"
+      class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden"
+    >
       <div class="absolute inset-0 bg-background/82 backdrop-blur-sm"></div>
 
       <div
@@ -825,6 +832,7 @@
             >Best Seller</span
           >
           <button
+          id="product-modal-close"
             class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center border border-white/20 text-white bg-background/65 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer"
           >
             <i data-lucide="x" class="w-4 h-4 text-white"></i>
