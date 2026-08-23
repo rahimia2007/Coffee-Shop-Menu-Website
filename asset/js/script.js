@@ -10,6 +10,11 @@ const shoppingCartModal = document.getElementById("shopping-cart-modal");
 const shoppingCartContent = document.getElementById("shopping-cart-content");
 const shoppingCartCloseBtn = document.getElementById("shopping-cart-close-btn");
 
+const currentOrderBtn = document.getElementById("current-order-btn");
+const pastOrdersBtn = document.getElementById("past-orders-btn");
+const pastOrdersContent = document.getElementById("past-orders-content");
+const currentOrderContent = document.getElementById("current-order-content");
+
 function showMenu() {
   if (mobileNav.className.includes("opacity-0")) {
     mobileNav.classList.remove("opacity-0");
@@ -61,6 +66,24 @@ function hideShoppingCartModal() {
   shoppingCartContent.classList.add("translate-x-full");
 }
 
+function showCurrentOrder() {
+  pastOrdersContent.classList.add("hidden");
+  currentOrderContent.classList.remove("hidden");
+  currentOrderBtn.className =
+    "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-primary text-background";
+  pastOrdersBtn.className =
+    "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text";
+}
+
+function showPastOrders() {
+  pastOrdersContent.classList.remove("hidden");
+  currentOrderContent.classList.add("hidden");
+  pastOrdersBtn.className =
+    "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-primary text-background";
+  currentOrderBtn.className =
+    "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text";
+}
+
 menuToggle.addEventListener("click", showMenu);
 productCards.forEach(function (productCard) {
   productCard.addEventListener("click", showProductModal);
@@ -68,3 +91,6 @@ productCards.forEach(function (productCard) {
 productModalCloseBtn.addEventListener("click", hideProductModal);
 openCartBtn.addEventListener("click", showShoppingCartModal);
 shoppingCartCloseBtn.addEventListener("click", hideShoppingCartModal);
+
+currentOrderBtn.addEventListener("click", showCurrentOrder);
+pastOrdersBtn.addEventListener("click", showPastOrders);
