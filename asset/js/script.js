@@ -4,8 +4,7 @@ const mobileNav = document.getElementById("mobile-nav");
 const productCarts = document.querySelectorAll("#product-cart");
 const productModal = document.getElementById("product-modal");
 const productModalCloseBtn = document.getElementById("product-modal-close");
-
-menuToggle.addEventListener("click", function () {
+function showMenu() {
   if (mobileNav.className.includes("opacity-0")) {
     mobileNav.classList.remove("opacity-0");
     mobileNav.classList.add("opacity-100");
@@ -32,7 +31,7 @@ menuToggle.addEventListener("click", function () {
     // For convert icons to SVG
     lucide.createIcons();
   }
-});
+}
 
 function showProductModal() {
   productModal.classList.remove("hidden");
@@ -42,6 +41,7 @@ function hideProductModal() {
   productModal.classList.add("hidden");
 }
 
+menuToggle.addEventListener("click", showMenu);
 productCarts.forEach(function (productCart) {
   productCart.addEventListener("click", showProductModal);
 });
