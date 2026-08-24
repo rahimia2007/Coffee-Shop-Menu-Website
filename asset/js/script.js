@@ -4,6 +4,7 @@ const mobileNav = document.getElementById("mobile-nav");
 const productCards = document.querySelectorAll("#product-card");
 const productModal = document.getElementById("product-modal");
 const productModalCloseBtn = document.getElementById("product-modal-close");
+const productPageBg = document.getElementById("product-page-bg");
 
 const openCartBtn = document.getElementById("open-cart-btn");
 const shoppingCartModal = document.getElementById("shopping-cart-modal");
@@ -93,6 +94,7 @@ productCards.forEach(function (productCard) {
   productCard.addEventListener("click", showProductModal);
 });
 productModalCloseBtn.addEventListener("click", hideProductModal);
+productPageBg.addEventListener("click", hideProductModal);
 openCartBtn.addEventListener("click", showShoppingCartModal);
 shoppingCartCloseBtn.addEventListener("click", hideShoppingCartModal);
 shoppingCartBg.addEventListener("click", hideShoppingCartModal);
