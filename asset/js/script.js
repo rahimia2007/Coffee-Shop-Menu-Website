@@ -15,6 +15,7 @@ const pastOrdersBtn = document.getElementById("past-orders-btn");
 const pastOrdersContent = document.getElementById("past-orders-content");
 const currentOrderContent = document.getElementById("current-order-content");
 const priceTotalContent = document.getElementById("price-total-content");
+const shoppingCartBg = document.getElementById("shopping-cart-bg");
 
 function showMenu() {
   if (mobileNav.className.includes("opacity-0")) {
@@ -94,6 +95,7 @@ productCards.forEach(function (productCard) {
 productModalCloseBtn.addEventListener("click", hideProductModal);
 openCartBtn.addEventListener("click", showShoppingCartModal);
 shoppingCartCloseBtn.addEventListener("click", hideShoppingCartModal);
+shoppingCartBg.addEventListener("click", hideShoppingCartModal);
 
 currentOrderBtn.addEventListener("click", showCurrentOrder);
 pastOrdersBtn.addEventListener("click", showPastOrders);
