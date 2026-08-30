@@ -1,4 +1,14 @@
 const productContainer = document.getElementById("product-container");
+const productModal = document.getElementById("product-modal");
+const productModalCloseBtn = document.getElementById("product-modal-close");
+const productPageBg = document.getElementById("product-page-bg");
+const productPageImg = document.getElementById("product-page-img");
+const productPageTitle = document.getElementById("product-page-title");
+const productPageDescription = document.getElementById(
+  "product-page-description",
+);
+const productPagePrice = document.getElementById("product-page-price");
+const addToCartBtn = document.getElementById("add-to-cart-btn");
 
 let products = null;
 
@@ -12,19 +22,19 @@ const fetchProducts = () => {
     .then((response) => {
       return response.json();
     })
-    .then((products) => {
-      showProduct(products);
+    .then((data) => {
+      showProduct(data);
+      products = data;
     });
 };
 
 const showProduct = (products) => {
-  console.log(products);
-
   products.forEach((product) => {
     productContainer.insertAdjacentHTML(
       "beforeend",
       `
       <div
+      onclick='showProductModal("${product.id}")'
         class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
         <div class="relative overflow-hidden h-74">
@@ -74,4 +84,30 @@ const showProduct = (products) => {
   });
 };
 
+function showProductModal(productId) {
+  productModal.classList.remove("hidden");
+  const findProduct = products.find((product) => {
+    return product.id == productId;
+  });
+
+  productPageImg.setAttribute(
+    "src",
+    "../asset/img/product-img/" + findProduct.image_url,
+  );
+  productPageTitle.textContent = findProduct.name;
+  productPageDescription.textContent = findProduct.description;
+  productPagePrice.textContent = findProduct.price;
+}
+
+function hideProductModal() {
+  productModal.classList.add("hidden");
+}
+
+function addToCart() {
+  console.log(findProduct.id);
+}
+
 window.addEventListener("load", fetchProducts);
+
+productModalCloseBtn.addEventListener("click", hideProductModal);
+productPageBg.addEventListener("click", hideProductModal);

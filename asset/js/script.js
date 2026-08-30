@@ -95,9 +95,9 @@ productCards.forEach(function (productCard) {
 });
 productModalCloseBtn.addEventListener("click", hideProductModal);
 productPageBg.addEventListener("click", hideProductModal);
-openCartBtn.addEventListener("click", showShoppingCartModal);
-shoppingCartCloseBtn.addEventListener("click", hideShoppingCartModal);
-shoppingCartBg.addEventListener("click", hideShoppingCartModal);
+// openCartBtn.addEventListener("click", showShoppingCartModal);
+// shoppingCartCloseBtn.addEventListener("click", hideShoppingCartModal);
+// shoppingCartBg.addEventListener("click", hideShoppingCartModal);
 
-currentOrderBtn.addEventListener("click", showCurrentOrder);
-pastOrdersBtn.addEventListener("click", showPastOrders);
+// currentOrderBtn.addEventListener("click", showCurrentOrder);
+// pastOrdersBtn.addEventListener("click", showPastOrders);

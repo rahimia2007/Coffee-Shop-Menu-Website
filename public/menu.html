@@ -225,14 +225,21 @@
     </footer>
 
     <!-- Product Page Modal -->
-    <div class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden">
-      <div class="absolute inset-0 bg-background/82 backdrop-blur-sm"></div>
+    <div
+      id="product-modal"
+      class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden"
+    >
+      <div
+        id="product-page-bg"
+        class="absolute inset-0 bg-background/82 backdrop-blur-sm"
+      ></div>
 
       <div
         class="relative z-10 rounded-3xl overflow-x-hidden w-full max-w-2xl max-h-[92vh] border border-primary/22 bg-elevated-cards"
       >
         <div class="relative h-64 md:h-80 bg-cards">
           <img
+            id="product-page-img"
             class="w-full h-full object-cover"
             src="../asset/img/espresso.jpg"
             alt=""
@@ -245,6 +252,7 @@
             >Best Seller</span
           >
           <button
+            id="product-modal-close"
             class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center border border-white/20 text-white bg-background/65 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer"
           >
             <i data-lucide="x" class="w-4 h-4 text-white"></i>
@@ -254,17 +262,22 @@
         <div class="p-6 md:p-7">
           <div class="flex justify-between items-start mb-3">
             <h3
+              id="product-page-title"
               class="text-3xl text-primary-text font-Playfair font-bold leading-tight"
             >
               Espresso Romano
             </h3>
             <span
+              id="product-page-price"
               class="font-dmmono text-xl text-primary font-bold shrink-0 ml-4"
               >$4.50</span
             >
           </div>
 
-          <p class="text-sm text-secondary-text leading-relaxed mb-7">
+          <p
+            id="product-page-description"
+            class="text-sm text-secondary-text leading-relaxed mb-7"
+          >
             A bold shot of single-origin espresso with a twist of lemon zest.
             Bright, clean, and intensely aromatic.
           </p>
@@ -341,6 +354,7 @@
             </div>
 
             <button
+              id="add-to-cart-btn"
               class="flex-1 py-3.5 rounded-xl font-semibold text-sm transition-all hover:opacity-90 active:scale-95 bg-primary text-background"
             >
               Add to Cart · $
@@ -545,7 +559,7 @@
       lucide.createIcons();
     </script>
 
-    <script src="../asset/js/script.js"></script>
+    <!-- <script src="../asset/js/script.js"></script> -->
     <script src="../asset/js/menu.js"></script>
   </body>
 </html>
