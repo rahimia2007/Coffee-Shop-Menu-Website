@@ -309,15 +309,18 @@
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-3 rounded-xl px-1.5 bg-cards">
               <button
+                id="product-page-increase-btn"
                 class="w-8 h-10 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
               >
                 <i data-lucide="minus" class="w-3.5 h-3.5"></i>
               </button>
               <span
+                id="product-page-number"
                 class="font-mono text-sm font-bold w-4 text-center text-primary-text"
                 >1</span
               >
               <button
+                id="product-page-reduction-btn"
                 class="w-8 h-10 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
               >
                 <i data-lucide="plus" class="w-3.5 h-3.5"></i>
@@ -329,7 +332,7 @@
               class="flex-1 py-3.5 rounded-xl font-semibold text-sm transition-all hover:opacity-90 active:scale-95 bg-primary text-background"
             >
               Add to Cart · $
-              <span>5.00</span>
+              <span id="add-to-cart-total-price">5.00</span>
             </button>
           </div>
         </div>
