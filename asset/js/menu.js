@@ -1,8 +1,9 @@
 const productContainer = document.getElementById("product-container");
+const categoriesContainer = document.getElementById("categories-container");
 
 let products = null;
 
-const fetchProducts = () => {
+const fetchHandler = () => {
   fetch("https://bqpbxsyxslyednegacov.supabase.co/rest/v1/products?select=*", {
     headers: {
       apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
@@ -13,13 +14,34 @@ const fetchProducts = () => {
       return response.json();
     })
     .then((data) => {
-      showProduct(data);
       products = data;
+    });
+
+  fetch(
+    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/categories?select=*",
+    {
+      headers: {
+        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      },
+    },
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      showCategories(data);
+      showProduct(data[0].id);
     });
 };
 
-const showProduct = (products) => {
-  products.forEach((product) => {
+const showProduct = (categoryId) => {
+  productContainer.innerHTML = "";
+  const findProducts = products.filter((product) => {
+    return product.category_id === categoryId;
+  });
+
+  findProducts.forEach((product) => {
     productContainer.insertAdjacentHTML(
       "beforeend",
       `
@@ -74,4 +96,31 @@ const showProduct = (products) => {
   });
 };
 
-window.addEventListener("load", fetchProducts);
+const showCategories = (categories) => {
+  categories.forEach((category) => {
+    categoriesContainer.insertAdjacentHTML(
+      "beforeend",
+      `
+      <button onclick="showProduct('${category.id}')" class="px-4 py-2 rounded-full text-sm font-medium transition-all bg-transparent text-secondary-text border border-primary/15 hover:bg-primary hover:text-background cursor-pointer">
+        ${category.name}
+      </button>
+      `,
+    );
+  });
+
+  const categoryBtns = categoriesContainer.querySelectorAll("button");
+  categoryBtns[0].className =
+    "px-4 py-2 rounded-full text-sm font-medium transition-all bg-primary text-background cursor-pointer";
+  categoryBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      categoryBtns.forEach((btn) => {
+        btn.className =
+          "px-4 py-2 rounded-full text-sm font-medium transition-all bg-transparent text-secondary-text border border-primary/15 hover:bg-primary hover:text-background cursor-pointer";
+      });
+      btn.className =
+        "px-4 py-2 rounded-full text-sm font-medium transition-all bg-primary text-background cursor-pointer";
+    });
+  });
+};
+
+window.addEventListener("load", fetchHandler);
