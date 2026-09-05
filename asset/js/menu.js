@@ -3,21 +3,19 @@ const categoriesContainer = document.getElementById("categories-container");
 
 let products = null;
 
-const fetchHandler = () => {
-  fetch("https://bqpbxsyxslyednegacov.supabase.co/rest/v1/products?select=*", {
-    headers: {
-      apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-      Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+const fetchHandler = async () => {
+  const productResponse = await fetch(
+    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/products?select=*",
+    {
+      headers: {
+        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      },
     },
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      products = data;
-    });
+  );
+  products = await productResponse.json();
 
-  fetch(
+  const categoriesResponse = await fetch(
     "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/categories?select=*",
     {
       headers: {
@@ -25,14 +23,11 @@ const fetchHandler = () => {
         Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
       },
     },
-  )
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      showCategories(data);
-      showProduct(data[0].id);
-    });
+  );
+  const categoriesData = await categoriesResponse.json();
+
+  showCategories(categoriesData);
+  showProduct(categoriesData[0].id);
 };
 
 const showProduct = (categoryId) => {
