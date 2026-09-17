@@ -17,6 +17,8 @@ const productPageNumber = document.getElementById("product-page-number");
 const addToCartBtn = document.getElementById("add-to-cart-btn");
 const addToCartTotalPrice = document.getElementById("add-to-cart-total-price");
 
+let cart = [];
+
 function showProductModal(productId) {
   productModal.classList.remove("hidden");
   const findProduct = products.find((product) => {
@@ -35,7 +37,19 @@ function showProductModal(productId) {
     `addToCart(${JSON.stringify(findProduct)})`,
   );
   addToCartTotalPrice.textContent = findProduct.price;
-  productPageNumber.textContent = 1;
+
+  let count = 0;
+  const isInCart = cart.some((productInCart) => {
+    count = count + 1;
+
+    return productInCart.id === productId;
+  });
+
+  if (isInCart) {
+    productPageNumber.textContent = cart[count - 1].quantity;
+  } else {
+    productPageNumber.textContent = 1;
+  }
 }
 
 function hideProductModal() {
@@ -60,6 +74,40 @@ const reductionNumberProductPage = () => {
   }
 };
 
+const addToCart = (product) => {
+  let count = 0;
+  const isInCart = cart.some((productInCart) => {
+    count = count + 1;
+
+    return productInCart.id === product.id;
+  });
+
+  if (isInCart) {
+    cart[count - 1].quantity = productPageNumber.textContent;
+    console.log(cart);
+  } else {
+    const newProduct = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image_url: product.image_url,
+      quantity: productPageNumber.textContent,
+    };
+    cart.push(newProduct);
+    console.log(cart);
+  }
+  saveCartInLocalStorage();
+};
+
+const saveCartInLocalStorage = () => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
+
+const getCartFromLocalStorage = () => {
+  cart = JSON.parse(localStorage.getItem("cart"));
+};
+
+window.addEventListener("load", getCartFromLocalStorage);
 productModalCloseBtn.addEventListener("click", hideProductModal);
 productPageBg.addEventListener("click", hideProductModal);
 productPageIncreaseBtn.addEventListener("click", increaseNumberProductPage);
