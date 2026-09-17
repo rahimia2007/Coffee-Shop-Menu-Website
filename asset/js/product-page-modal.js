@@ -84,7 +84,6 @@ const addToCart = (product) => {
 
   if (isInCart) {
     cart[count - 1].quantity = productPageNumber.textContent;
-    console.log(cart);
   } else {
     const newProduct = {
       id: product.id,
@@ -94,7 +93,6 @@ const addToCart = (product) => {
       quantity: productPageNumber.textContent,
     };
     cart.push(newProduct);
-    console.log(cart);
   }
   saveCartInLocalStorage();
 };
