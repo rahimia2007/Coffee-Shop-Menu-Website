@@ -102,7 +102,10 @@ const saveCartInLocalStorage = () => {
 };
 
 const getCartFromLocalStorage = () => {
-  cart = JSON.parse(localStorage.getItem("cart"));
+  data = JSON.parse(localStorage.getItem("cart"));
+  if (data) {
+    cart = data;
+  }
 };
 
 window.addEventListener("load", getCartFromLocalStorage);
