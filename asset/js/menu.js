@@ -41,8 +41,7 @@ const showProduct = (categoryId) => {
       "beforeend",
       `
       <div
-      onclick='showProductModal("${product.id}")'
-        class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+        class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
         <div class="relative overflow-hidden h-74">
             <img
@@ -51,13 +50,8 @@ const showProduct = (categoryId) => {
             alt=""
             />
             <div
-            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-background/52"
+            class="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300 bg-background/52"
             >
-            <button
-                class="text-xs font-semibold px-3 py-1.5 rounded-full text-primary-text border border-primary-text/27 bg-background/72 cursor-pointer"
-            >
-                View Details
-            </button>
             </div>
             <span
             class="absolute top-3 left-3 text-xs text-background bg-primary font-dmmono px-2.5 py-1 rounded-full font-medium"
@@ -78,6 +72,7 @@ const showProduct = (categoryId) => {
                 >$${product.price}</span
             >
             <button
+                onclick='showProductModal("${product.id}")'
                 class="text-xs px-3 py-1.5 rounded-full font-medium transition-all hover:opacity-80 bg-primary/15 text-primary border border-primary/25 cursor-pointer"
             >
                 +add
