@@ -16,8 +16,10 @@ const productPageReductionBtn = document.getElementById(
 const productPageNumber = document.getElementById("product-page-number");
 const addToCartBtn = document.getElementById("add-to-cart-btn");
 const addToCartTotalPrice = document.getElementById("add-to-cart-total-price");
+const sizeBtns = document.querySelectorAll("#size-btn-wrapper button");
 
 let cart = [];
+let productSize = "Regular";
 
 function showProductModal(productId) {
   productModal.classList.remove("hidden");
@@ -79,7 +81,9 @@ const addToCart = (product) => {
   const isInCart = cart.some((productInCart) => {
     count = count + 1;
 
-    return productInCart.id === product.id;
+    return (
+      productInCart.id === product.id && productInCart.size === productSize
+    );
   });
 
   if (isInCart) {
@@ -91,6 +95,7 @@ const addToCart = (product) => {
       price: product.price,
       image_url: product.image_url,
       quantity: productPageNumber.textContent,
+      size: productSize,
     };
     cart.push(newProduct);
   }
@@ -113,3 +118,15 @@ productModalCloseBtn.addEventListener("click", hideProductModal);
 productPageBg.addEventListener("click", hideProductModal);
 productPageIncreaseBtn.addEventListener("click", increaseNumberProductPage);
 productPageReductionBtn.addEventListener("click", reductionNumberProductPage);
+sizeBtns.forEach((sizeBtn) => {
+  sizeBtn.addEventListener("click", () => {
+    sizeBtns.forEach((sizeBtn) => {
+      sizeBtn.className =
+        "py-2.5 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text cursor-pointer";
+    });
+    sizeBtn.className =
+      "py-2.5 rounded-xl text-sm font-medium transition-all bg-primary text-background cursor-pointer";
+
+    productSize = sizeBtn.textContent.trim();
+  });
+});
