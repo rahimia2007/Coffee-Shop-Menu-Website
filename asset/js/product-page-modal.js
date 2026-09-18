@@ -52,6 +52,14 @@ function showProductModal(productId) {
   } else {
     productPageNumber.textContent = 1;
   }
+
+  sizeBtns.forEach((sizeBtn) => {
+    sizeBtn.className =
+      "py-2.5 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text cursor-pointer";
+  });
+
+  sizeBtns[1].className =
+    "py-2.5 rounded-xl text-sm font-medium transition-all bg-primary text-background cursor-pointer";
 }
 
 function hideProductModal() {
