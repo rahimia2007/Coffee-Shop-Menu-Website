@@ -20,8 +20,11 @@ const sizeBtns = document.querySelectorAll("#size-btn-wrapper button");
 
 let cart = [];
 let productSize = "Regular";
+let productIdShow = null;
 
 function showProductModal(productId) {
+  productSize = "Regular";
+  productIdShow = productId;
   productModal.classList.remove("hidden");
   const findProduct = products.find((product) => {
     return product.id == productId;
@@ -60,6 +63,7 @@ function showProductModal(productId) {
 
   sizeBtns[1].className =
     "py-2.5 rounded-xl text-sm font-medium transition-all bg-primary text-background cursor-pointer";
+  showProductCount();
 }
 
 function hideProductModal() {
@@ -136,5 +140,17 @@ sizeBtns.forEach((sizeBtn) => {
       "py-2.5 rounded-xl text-sm font-medium transition-all bg-primary text-background cursor-pointer";
 
     productSize = sizeBtn.textContent.trim();
+    showProductCount();
   });
 });
+
+const showProductCount = () => {
+  const findProduct = cart.find((product) => {
+    return product.id === productIdShow && product.size === productSize;
+  });
+  if (findProduct) {
+    productPageNumber.textContent = findProduct.quantity;
+  } else {
+    productPageNumber.textContent = 1;
+  }
+};
