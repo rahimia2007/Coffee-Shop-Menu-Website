@@ -43,19 +43,6 @@ function showProductModal(productId) {
   );
   addToCartTotalPrice.textContent = findProduct.price;
 
-  let count = 0;
-  const isInCart = cart.some((productInCart) => {
-    count = count + 1;
-
-    return productInCart.id === productId;
-  });
-
-  if (isInCart) {
-    productPageNumber.textContent = cart[count - 1].quantity;
-  } else {
-    productPageNumber.textContent = 1;
-  }
-
   sizeBtns.forEach((sizeBtn) => {
     sizeBtn.className =
       "py-2.5 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text cursor-pointer";
