@@ -106,6 +106,9 @@ const showCurrentOrderProduct = () => {
         `,
       );
     });
+
+    // For convert icons to SVG
+    lucide.createIcons();
   } else {
     currentOrderContent.innerHTML =
       "<p class='text-secondary-text'>You haven't added any products to the shopping cart.</p>";
