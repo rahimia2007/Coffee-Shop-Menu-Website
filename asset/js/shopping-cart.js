@@ -97,6 +97,7 @@ const showCurrentOrderProduct = () => {
                 placeholder='Note, e.g. "Extra hot"'
               />
               <button
+              onclick="deleteProductFromCart('${product.id}','${product.size}')"
                 class="w-6 h-6 flex items-center justify-center text-placeholders transition-opacity hover:opacity-60 cursor-pointer"
               >
                 <i data-lucide="x" class="w-3.5 h-3.5"></i>
@@ -113,6 +114,15 @@ const showCurrentOrderProduct = () => {
     currentOrderContent.innerHTML =
       "<p class='text-secondary-text'>You haven't added any products to the shopping cart.</p>";
   }
+};
+
+const deleteProductFromCart = (productId, productSize) => {
+  const findProduct = cart.findIndex((product) => {
+    return product.id === productId && productSize === product.size;
+  });
+  cart.splice(findProduct, 1);
+  showCurrentOrderProduct();
+  saveCartInLocalStorage();
 };
 
 openCartBtn.addEventListener("click", showShoppingCartModal);
