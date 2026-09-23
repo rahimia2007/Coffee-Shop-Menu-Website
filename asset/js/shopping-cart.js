@@ -8,7 +8,11 @@ const pastOrdersBtn = document.getElementById("past-orders-btn");
 const pastOrdersContent = document.getElementById("past-orders-content");
 const currentOrderContent = document.getElementById("current-order-content");
 const priceTotalContent = document.getElementById("price-total-content");
+const totalPriceEl = document.getElementById("total-price");
+const discountedPriceEl = document.getElementById("discounted-price");
 const shoppingCartBg = document.getElementById("shopping-cart-bg");
+
+const discount = 0;
 
 function showShoppingCartModal() {
   shoppingCartModal.classList.remove("invisible");
@@ -16,7 +20,17 @@ function showShoppingCartModal() {
   shoppingCartContent.classList.remove("translate-x-full");
   shoppingCartContent.classList.add("translate-x-0");
 
-  showCurrentOrderProduct();
+  showCurrentOrder();
+  let totalPrice = 0;
+  cart.forEach((product) => {
+    totalPrice += product.price * product.quantity;
+  });
+  totalPriceEl.textContent = `$${totalPrice}`;
+  if (discount) {
+    discountedPriceEl.textContent = `$${totalPrice - (totalPrice * discount) / 100}`;
+  } else {
+    discountedPriceEl.textContent = `$${totalPrice}`;
+  }
 }
 
 function hideShoppingCartModal() {
@@ -29,11 +43,11 @@ function hideShoppingCartModal() {
 function showCurrentOrder() {
   pastOrdersContent.classList.add("hidden");
   currentOrderContent.classList.remove("hidden");
-  priceTotalContent.classList.remove("hidden");
   currentOrderBtn.className =
     "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-primary text-background";
   pastOrdersBtn.className =
     "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text";
+  showCurrentOrderProduct();
 }
 
 function showPastOrders() {
@@ -106,6 +120,8 @@ const showCurrentOrderProduct = () => {
           </div>
         `,
       );
+
+      priceTotalContent.classList.remove("hidden");
     });
 
     // For convert icons to SVG
@@ -113,6 +129,7 @@ const showCurrentOrderProduct = () => {
   } else {
     currentOrderContent.innerHTML =
       "<p class='text-secondary-text'>You haven't added any products to the shopping cart.</p>";
+    priceTotalContent.classList.add("hidden");
   }
 };
 
