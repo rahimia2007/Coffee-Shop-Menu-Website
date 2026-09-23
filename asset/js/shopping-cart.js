@@ -140,6 +140,7 @@ const deleteProductFromCart = (productId, productSize) => {
   cart.splice(findProduct, 1);
   showCurrentOrderProduct();
   saveCartInLocalStorage();
+  showShoppingCartModal();
 };
 
 openCartBtn.addEventListener("click", showShoppingCartModal);
