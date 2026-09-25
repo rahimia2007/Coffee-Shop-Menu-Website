@@ -91,15 +91,18 @@ const showCurrentOrderProduct = () => {
                 class="flex items-center gap-1.5 rounded-lg px-1 bg-elevated-cards"
               >
                 <button
+                  onclick="increaseNumberProductCart('${product.id}','${product.size}')"
                   class="w-6 h-6 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
                 >
                   <i data-lucide="plus" class="w-3 h-3"></i>
                 </button>
                 <span
+                  id="product-cart-quantity"
                   class="font-dmmono text-xs font-bold w-3 text-center text-primary-text"
                   >${product.quantity}</span
                 >
                 <button
+                  onclick="reductionNumberProductCart('${product.id}','${product.size}')"
                   class="w-6 h-6 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
                 >
                   <i data-lucide="minus" class="w-3 h-3"></i>
@@ -141,6 +144,38 @@ const deleteProductFromCart = (productId, productSize) => {
   showCurrentOrderProduct();
   saveCartInLocalStorage();
   showShoppingCartModal();
+};
+
+const increaseNumberProductCart = (productId, productSize) => {
+  const productCartQuantity = document.getElementById(`product-cart-quantity`);
+  const findProduct = cart.find((product) => {
+    return product.id === productId && productSize === product.size;
+  });
+  
+  let count = Number(findProduct.quantity);
+  if (productCartQuantity.textContent <= 9) {
+    count += 1;
+  }
+
+  findProduct.quantity = count;
+  showCurrentOrderProduct();
+  saveCartInLocalStorage();
+};
+
+const reductionNumberProductCart = (productId, productSize) => {
+  const productCartQuantity = document.getElementById(`product-cart-quantity`);
+  const findProduct = cart.find((product) => {
+    return product.id === productId && productSize === product.size;
+  });
+
+  let count = Number(findProduct.quantity);
+  if (productCartQuantity.textContent != 1) {
+    count -= 1;
+  }
+
+  findProduct.quantity = count;
+  showCurrentOrderProduct();
+  saveCartInLocalStorage();
 };
 
 openCartBtn.addEventListener("click", showShoppingCartModal);
