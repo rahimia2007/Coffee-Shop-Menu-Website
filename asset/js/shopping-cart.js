@@ -144,7 +144,7 @@ const increaseNumberProductCart = (productId, productSize) => {
   });
 
   let count = Number(findProduct.quantity);
-  if (productCartQuantity.textContent <= 9) {
+  if (count <= 9) {
     count += 1;
   }
 
@@ -161,7 +161,7 @@ const reductionNumberProductCart = (productId, productSize) => {
   });
 
   let count = Number(findProduct.quantity);
-  if (productCartQuantity.textContent != 1) {
+  if (count != 1) {
     count -= 1;
   }
 
