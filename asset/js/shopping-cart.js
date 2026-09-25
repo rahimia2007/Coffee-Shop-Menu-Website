@@ -21,16 +21,7 @@ function showShoppingCartModal() {
   shoppingCartContent.classList.add("translate-x-0");
 
   showCurrentOrder();
-  let totalPrice = 0;
-  cart.forEach((product) => {
-    totalPrice += product.price * product.quantity;
-  });
-  totalPriceEl.textContent = `$${totalPrice}`;
-  if (discount) {
-    discountedPriceEl.textContent = `$${totalPrice - (totalPrice * discount) / 100}`;
-  } else {
-    discountedPriceEl.textContent = `$${totalPrice}`;
-  }
+  CalculatingTotalPrice();
 }
 
 function hideShoppingCartModal() {
@@ -151,7 +142,7 @@ const increaseNumberProductCart = (productId, productSize) => {
   const findProduct = cart.find((product) => {
     return product.id === productId && productSize === product.size;
   });
-  
+
   let count = Number(findProduct.quantity);
   if (productCartQuantity.textContent <= 9) {
     count += 1;
@@ -160,6 +151,7 @@ const increaseNumberProductCart = (productId, productSize) => {
   findProduct.quantity = count;
   showCurrentOrderProduct();
   saveCartInLocalStorage();
+  CalculatingTotalPrice();
 };
 
 const reductionNumberProductCart = (productId, productSize) => {
@@ -176,6 +168,20 @@ const reductionNumberProductCart = (productId, productSize) => {
   findProduct.quantity = count;
   showCurrentOrderProduct();
   saveCartInLocalStorage();
+  CalculatingTotalPrice();
+};
+
+const CalculatingTotalPrice = () => {
+  let totalPrice = 0;
+  cart.forEach((product) => {
+    totalPrice += product.price * product.quantity;
+  });
+  totalPriceEl.textContent = `$${totalPrice}`;
+  if (discount) {
+    discountedPriceEl.textContent = `$${totalPrice - (totalPrice * discount) / 100}`;
+  } else {
+    discountedPriceEl.textContent = `$${totalPrice}`;
+  }
 };
 
 openCartBtn.addEventListener("click", showShoppingCartModal);
