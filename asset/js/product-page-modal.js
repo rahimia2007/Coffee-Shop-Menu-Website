@@ -59,8 +59,8 @@ function hideProductModal() {
 
 const increaseNumberProductPage = () => {
   const productPrice = Number(productPagePrice.textContent);
-  if (productPageNumber.textContent != 1) {
-    productPageNumber.textContent = Number(productPageNumber.textContent) - 1;
+  if (productPageNumber.textContent <= 9) {
+    productPageNumber.textContent = Number(productPageNumber.textContent) + 1;
     addToCartTotalPrice.textContent =
       productPrice * Number(productPageNumber.textContent);
   }
@@ -68,8 +68,8 @@ const increaseNumberProductPage = () => {
 
 const reductionNumberProductPage = () => {
   const productPrice = Number(productPagePrice.textContent);
-  if (productPageNumber.textContent <= 9) {
-    productPageNumber.textContent = Number(productPageNumber.textContent) + 1;
+  if (productPageNumber.textContent != 1) {
+    productPageNumber.textContent = Number(productPageNumber.textContent) - 1;
     addToCartTotalPrice.textContent =
       productPrice * Number(productPageNumber.textContent);
   }
