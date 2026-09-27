@@ -57,7 +57,7 @@ window.addEventListener("load", async () => {
     categoriesContainer.insertAdjacentHTML(
       "beforeend",
       `
-      <a href="./public/menu.html?${category.name}" class="relative group rounded-2xl overflow-hidden text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl h-56 bg-cards cursor-pointer">
+      <a href="./public/menu.html?category=${category.name.split(" ").join("-")}" class="relative group rounded-2xl overflow-hidden text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl h-56 bg-cards cursor-pointer">
         <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500" src="./asset/img/${category.img_url}" alt="">
         <div class="absolute inset-0 z-5 bg-linear-to-b from-background/0 via-background/18 to-background/88"></div>
         <div class="absolute inset-0 z-6 bg-primary/10 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>

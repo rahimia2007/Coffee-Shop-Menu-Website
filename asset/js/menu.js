@@ -26,8 +26,18 @@ const fetchHandler = async () => {
   );
   const categoriesData = await categoriesResponse.json();
 
-  showCategories(categoriesData);
-  showProduct(categoriesData[0].id);
+  const selectedCategory = location.search
+    .replace("?", "")
+    .split("-")
+    .join(" ")
+    .split("=")[1];
+
+  const findcategory = await categoriesData.find((category) => {
+    return category.name === selectedCategory;
+  });
+
+  showCategories(categoriesData, findcategory);
+  showProduct(findcategory.id ? findcategory.id : categoriesData[0].id);
 };
 
 const showProduct = (categoryId) => {
