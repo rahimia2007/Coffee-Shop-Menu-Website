@@ -36,7 +36,7 @@ const fetchHandler = async () => {
     return category.name === selectedCategory;
   });
 
-  showCategories(categoriesData, findcategory);
+  showCategories(categoriesData, findcategory.id);
   showProduct(findcategory.id ? findcategory.id : categoriesData[0].id);
 };
 
@@ -96,12 +96,12 @@ const showProduct = (categoryId) => {
   });
 };
 
-const showCategories = (categories) => {
+const showCategories = (categories, categoryId) => {
   categories.forEach((category) => {
     categoriesContainer.insertAdjacentHTML(
       "beforeend",
       `
-      <button onclick="showProduct('${category.id}')" class="px-4 py-2 rounded-full text-sm font-medium transition-all bg-transparent text-secondary-text border border-primary/15 hover:bg-primary hover:text-background cursor-pointer">
+      <button onclick="showProduct('${category.id}')" class="${categoryId === category.id ? "px-4 py-2 rounded-full text-sm font-medium transition-all bg-primary text-background cursor-pointer" : "px-4 py-2 rounded-full text-sm font-medium transition-all bg-transparent text-secondary-text border border-primary/15 hover:bg-primary hover:text-background cursor-pointer"}">
         ${category.name}
       </button>
       `,
@@ -109,8 +109,6 @@ const showCategories = (categories) => {
   });
 
   const categoryBtns = categoriesContainer.querySelectorAll("button");
-  categoryBtns[0].className =
-    "px-4 py-2 rounded-full text-sm font-medium transition-all bg-primary text-background cursor-pointer";
   categoryBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       categoryBtns.forEach((btn) => {
