@@ -36,8 +36,8 @@ const fetchHandler = async () => {
     return category.name === selectedCategory;
   });
 
-  showCategories(categoriesData, findcategory.id);
-  showProduct(findcategory.id ? findcategory.id : categoriesData[0].id);
+  showCategories(categoriesData, findcategory?.id ? findcategory.id : categoriesData[0].id);
+  showProduct(findcategory?.id ? findcategory.id : categoriesData[0].id);
 };
 
 const showProduct = (categoryId) => {
