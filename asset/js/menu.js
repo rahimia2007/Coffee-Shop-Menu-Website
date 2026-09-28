@@ -36,7 +36,10 @@ const fetchHandler = async () => {
     return category.name === selectedCategory;
   });
 
-  showCategories(categoriesData, findcategory?.id ? findcategory.id : categoriesData[0].id);
+  showCategories(
+    categoriesData,
+    findcategory?.id ? findcategory.id : categoriesData[0].id,
+  );
   showProduct(findcategory?.id ? findcategory.id : categoriesData[0].id);
 };
 
@@ -117,6 +120,12 @@ const showCategories = (categories, categoryId) => {
       });
       btn.className =
         "px-4 py-2 rounded-full text-sm font-medium transition-all bg-primary text-background cursor-pointer";
+
+      window.history.replaceState(
+        null,
+        "",
+        `?category=${btn.textContent.trim().split(" ").join("-")}`,
+      );
     });
   });
 };
