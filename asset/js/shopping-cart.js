@@ -11,6 +11,23 @@ const priceTotalContent = document.getElementById("price-total-content");
 const totalPriceEl = document.getElementById("total-price");
 const discountedPriceEl = document.getElementById("discounted-price");
 const shoppingCartBg = document.getElementById("shopping-cart-bg");
+const proceedCheckoutBtn = document.getElementById("proceed-checkout-btn");
+
+const checkoutModal = document.getElementById("checkout-modal");
+const closeCheckoutModalBtn = document.getElementById(
+  "close-checkout-modal-btn",
+);
+const checkoutModalBg = document.getElementById("checkout-modal-bg");
+const dineInBtn = document.getElementById("dine-in-btn");
+const takeoutBtn = document.getElementById("takeout-btn");
+const checkoutModalInputLable = document.getElementById(
+  "checkout-modal-input-lable",
+);
+const checkoutModalInput = document.getElementById("checkout-modal-input");
+const checkoutBtn = document.getElementById("checkout-btn");
+const checkoutHeaderProductLength = document.getElementById(
+  "checkout-header-product-length",
+);
 
 const discount = 0;
 
@@ -184,9 +201,75 @@ const CalculatingTotalPrice = () => {
   }
 };
 
+const showCheckoutModal = () => {
+  checkoutModal.classList.remove("hidden");
+
+  let productLength = 0;
+  let totalPrice = 0;
+
+  cart.forEach((product) => {
+    productLength += +product.quantity;
+    totalPrice += product.price;
+  });
+  checkoutHeaderProductLength.innerHTML = `
+    ${productLength} item ·
+    <span class="font-dmmono text-primary">$${totalPrice}</span>`;
+};
+
+const hideCheckoutModal = () => {
+  checkoutModal.classList.add("hidden");
+};
+
+const changeToDineIn = () => {
+  dineInBtn.className =
+    "flex flex-col items-center gap-2.5 py-5 rounded-2xl border transition-all text-primary bg-primary/12 border-primary cursor-pointer";
+
+  takeoutBtn.className =
+    "flex flex-col items-center gap-2.5 py-5 rounded-2xl border transition-all text-secondary-text bg-cards border-primary/15 hover:text-primary hover:bg-primary/12 hover:border-primary cursor-pointer";
+
+  checkoutModalInputLable.textContent = "Table Number";
+  checkoutModalInput.placeholder = "e.g. 12";
+  checkoutModalInput.type = "number";
+  checkoutModalInput.value = "";
+
+  checkoutBtn.className =
+    "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
+};
+
+const changeToTakeout = () => {
+  takeoutBtn.className =
+    "flex flex-col items-center gap-2.5 py-5 rounded-2xl border transition-all text-primary bg-primary/12 border-primary cursor-pointer";
+
+  dineInBtn.className =
+    "flex flex-col items-center gap-2.5 py-5 rounded-2xl border transition-all text-secondary-text bg-cards border-primary/15 hover:text-primary hover:bg-primary/12 hover:border-primary cursor-pointer";
+
+  checkoutModalInputLable.textContent = "Delivery Address";
+  checkoutModalInput.placeholder = "address...";
+  checkoutModalInput.type = "text";
+  checkoutModalInput.value = "";
+
+  checkoutBtn.className =
+    "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
+};
+
 openCartBtn.addEventListener("click", showShoppingCartModal);
 shoppingCartCloseBtn.addEventListener("click", hideShoppingCartModal);
 shoppingCartBg.addEventListener("click", hideShoppingCartModal);
 
 currentOrderBtn.addEventListener("click", showCurrentOrder);
 pastOrdersBtn.addEventListener("click", showPastOrders);
+
+proceedCheckoutBtn.addEventListener("click", showCheckoutModal);
+closeCheckoutModalBtn.addEventListener("click", hideCheckoutModal);
+checkoutModalBg.addEventListener("click", hideCheckoutModal);
+dineInBtn.addEventListener("click", changeToDineIn);
+takeoutBtn.addEventListener("click", changeToTakeout);
+checkoutModalInput.addEventListener("keyup", () => {
+  if (checkoutModalInput.value.trim()) {
+    checkoutBtn.className =
+      "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-background bg-primary cursor-pointer";
+  } else {
+    checkoutBtn.className =
+      "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
+  }
+});
