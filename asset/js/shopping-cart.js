@@ -252,6 +252,113 @@ const changeToTakeout = () => {
     "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
 };
 
+const finallyCheckout = async () => {
+  let deliveryDetails = null;
+  if (checkoutModalInput.value.trim()) {
+    if (checkoutModalInput.type == "number") {
+      console.log("number");
+    } else {
+      deliveryDetails = { delivery_address: checkoutModalInput.value };
+    }
+  }
+
+  // set Delivery Details to server
+  await fetch(
+    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/delivery_details",
+    {
+      method: "POST",
+      headers: {
+        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        Authorization: " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(deliveryDetails),
+    },
+  );
+
+  const newDeliveryDetailsRes = await fetch(
+    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/delivery_details",
+    {
+      headers: {
+        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        Authorization: " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      },
+    },
+  );
+
+  const newDeliveryDetails = await newDeliveryDetailsRes.json();
+  const findDeliveryDetail = newDeliveryDetails.find((findDeliveryDetail) => {
+    return (
+      findDeliveryDetail.delivery_address ===
+        deliveryDetails.delivery_address ||
+      findDeliveryDetail.table_id === deliveryDetails.table_id
+    );
+  });
+
+  // set Orders to server
+  const orders = {
+    customer_id: "7cb2db73-8d12-4568-8dda-57eb2a1b224a",
+    delivery_detail_id: findDeliveryDetail.id,
+    is_delivered: false,
+  };
+  await fetch("https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders", {
+    method: "POST",
+    headers: {
+      apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      Authorization: " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify(orders),
+  });
+
+  const newOrdersRes = await fetch(
+    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders",
+    {
+      headers: {
+        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        Authorization: " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      },
+    },
+  );
+
+  const newOrders = await newOrdersRes.json();
+  const findOrder = newOrders.find((findDeliveryDetail) => {
+    return (
+      findDeliveryDetail.delivery_address ===
+        deliveryDetails.delivery_address ||
+      findDeliveryDetail.table_id === deliveryDetails.table_id
+    );
+  });
+
+  // add cart product to server
+  cart.forEach(async (product) => {
+    const newProduct = {
+      order_id: findOrder.id,
+      product_id: product.id,
+      quantity: +product.quantity,
+      size: product.size,
+      unit_price: product.price,
+    };
+
+    const response = await fetch(
+      "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/order_items",
+      {
+        method: "POST",
+        headers: {
+          apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          Authorization:
+            " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          "Content-Type": "application/json",
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify(newProduct),
+      },
+    );
+  });
+};
+
 openCartBtn.addEventListener("click", showShoppingCartModal);
 shoppingCartCloseBtn.addEventListener("click", hideShoppingCartModal);
 shoppingCartBg.addEventListener("click", hideShoppingCartModal);
@@ -273,3 +380,4 @@ checkoutModalInput.addEventListener("keyup", () => {
       "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
   }
 });
+checkoutBtn.addEventListener("click", finallyCheckout);
