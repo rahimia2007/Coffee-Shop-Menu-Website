@@ -218,6 +218,7 @@ const showCheckoutModal = () => {
 
 const hideCheckoutModal = () => {
   checkoutModal.classList.add("hidden");
+  checkoutModalInput.value = "";
 };
 
 const changeToDineIn = () => {
@@ -332,7 +333,7 @@ const finallyCheckout = async () => {
     );
   });
 
-  // add cart product to server
+  // add Cart Product to server
   cart.forEach(async (product) => {
     const newProduct = {
       order_id: findOrder.id,
@@ -357,6 +358,11 @@ const finallyCheckout = async () => {
       },
     );
   });
+
+  localStorage.clear();
+  cart = [];
+  showCurrentOrderProduct();
+  hideCheckoutModal();
 };
 
 openCartBtn.addEventListener("click", showShoppingCartModal);
