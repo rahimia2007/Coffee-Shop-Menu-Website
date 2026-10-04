@@ -58,7 +58,7 @@ function showCurrentOrder() {
   showCurrentOrderProduct();
 }
 
-function showPastOrders() {
+const showPastOrders = async () => {
   pastOrdersContent.classList.remove("hidden");
   currentOrderContent.classList.add("hidden");
   priceTotalContent.classList.add("hidden");
@@ -66,7 +66,121 @@ function showPastOrders() {
     "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-primary text-background";
   currentOrderBtn.className =
     "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text";
-}
+
+  const pastOrdersRes = await fetch(
+    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders?select=*",
+    {
+      headers: {
+        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      },
+    },
+  );
+  const allPastOrders = await pastOrdersRes.json();
+
+  const productsPastOrderRes = await fetch(
+    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/order_items?select=*",
+    {
+      headers: {
+        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      },
+    },
+  );
+  const productsPastOrder = await productsPastOrderRes.json();
+  pastOrdersContent.innerHTML = "";
+  allPastOrders.forEach((order) => {
+    pastOrdersContent.insertAdjacentHTML(
+      "beforeend",
+      `
+        <div class="rounded-xl border border-primary/15 bg-cards">
+          <div class="w-full flex items-center justify-between p-4 text-lefl">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span
+                  class="text-sm font-dmmono font-semibold text-primary-text"
+                  >ORD-2847</span
+                >
+                ${
+                  order.is_delivered
+                    ? `
+                  <span class="text-xs px-2 py-0.5 rounded-full font-medium font-dmmono bg-[#4ade80]/13 text-[#4ade80]">
+                    Delivered
+                  </span>`
+                    : `
+                  <span class="text-xs px-2 py-0.5 rounded-full font-medium font-dmmono bg-red-500/20 text-red-800">
+                    unDelivered
+                  </span>
+                  `
+                }
+              </div>
+              <p class="text-xs text-placeholders">July 28, 2026</p>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span id="past-orders-total-price" class="font-dmmono text-sm font-bold text-primary">
+                $${productsPastOrder
+                  .filter((productOrder) => productOrder.order_id === order.id)
+                  .reduce((totalPrice, productOrder) => {
+                    const forThisProducts = products.find(
+                      (product) => product.id === productOrder.product_id,
+                    );
+                    if (forThisProducts) {
+                      return (totalPrice +=
+                        productOrder.unit_price * productOrder.quantity);
+                    }
+                    return totalPrice;
+                  }, 0)}
+              </span>
+              <i
+                data-lucide="chevron-down"
+                class="w-4 h-4 text-placeholders rotate-180"
+              ></i>
+            </div>
+          </div>
+          <div class="px-4 pb-4 pt-3 border-t text-primary/15">
+            <div class="space-y-1.5 mb-4">
+              ${productsPastOrder
+                .filter((productOrder) => productOrder.order_id === order.id)
+                .map((productOrder) => {
+                  const forThisProducts = products.find(
+                    (product) => product.id === productOrder.product_id,
+                  );
+                  if (forThisProducts) {
+                    return `
+                    <div class="flex justify-between text-xs">
+                      <span class="text-secondary-text">${productOrder.quantity}x ${forThisProducts.name}</span>
+                      <span class="font-dmmono text-primary-text">$${+productOrder.unit_price * +productOrder.quantity}</span>
+                    </div>
+                    `;
+                  }
+                  const pastOrdersTotalPrice = document.getElementById(
+                    "past-orders-total-price",
+                  );
+
+                  if (pastOrdersTotalPrice.textContent.trim()) {
+                    pastOrdersTotalPrice.textContent =
+                      productOrder.unit_price * productOrder.quantity;
+                  } else {
+                    pastOrdersTotalPrice.textContent +=
+                      productOrder.unit_price * productOrder.quantity;
+                  }
+                })
+                .join("")}
+            </div>
+            <button
+              class="w-full py-2 rounded-xl text-xs font-semibold transition-all hover:opacity-80 bg-primary/13 text-primary border border-primary"
+            >
+              Reorder
+            </button>
+          </div>
+        </div>
+      `,
+    );
+  });
+
+  // For convert icons to SVG
+  lucide.createIcons();
+};
 
 const showCurrentOrderProduct = () => {
   currentOrderContent.textContent = "";
