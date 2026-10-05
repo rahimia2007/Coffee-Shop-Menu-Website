@@ -99,7 +99,7 @@ const showPastOrders = async () => {
               <div class="flex items-center gap-2 mb-1">
                 <span
                   class="text-sm font-dmmono font-semibold text-primary-text"
-                  >ORD-2847</span
+                  >ORD-${order.id.slice(0, 4)}</span
                 >
                 ${
                   order.is_delivered
@@ -114,7 +114,7 @@ const showPastOrders = async () => {
                   `
                 }
               </div>
-              <p class="text-xs text-placeholders">July 28, 2026</p>
+              <p class="text-xs text-placeholders" id="order-date-${order.id}"></p>
             </div>
             <div class="flex items-center gap-3 shrink-0">
               <span id="past-orders-total-price" class="font-dmmono text-sm font-bold text-primary">
@@ -176,6 +176,10 @@ const showPastOrders = async () => {
         </div>
       `,
     );
+
+    const orderDate = document.getElementById(`order-date-${order.id}`);
+    const pureOrderDate = new Date(order.order_date);
+    orderDate.textContent = `${pureOrderDate.toLocaleDateString("en-US", { month: "long" })} ${pureOrderDate.getDay()} ,${pureOrderDate.getFullYear()}`;
   });
 
   // For convert icons to SVG
