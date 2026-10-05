@@ -89,6 +89,7 @@ const showPastOrders = async () => {
   );
   const productsPastOrder = await productsPastOrderRes.json();
   pastOrdersContent.innerHTML = "";
+  let productForReOrder = [];
   allPastOrders.forEach((order) => {
     pastOrdersContent.insertAdjacentHTML(
       "beforeend",
@@ -146,6 +147,14 @@ const showPastOrders = async () => {
                     (product) => product.id === productOrder.product_id,
                   );
                   if (forThisProducts) {
+                    productForReOrder.push({
+                      id: forThisProducts.id,
+                      image_url: forThisProducts.image_url,
+                      name: forThisProducts.name,
+                      price: forThisProducts.price,
+                      quantity: productOrder.quantity,
+                      size: productOrder.size,
+                    });
                     return `
                     <div class="flex justify-between text-xs">
                       <span class="text-secondary-text">${productOrder.quantity}x ${forThisProducts.name}</span>
@@ -168,6 +177,7 @@ const showPastOrders = async () => {
                 .join("")}
             </div>
             <button
+            onclick="reOrder(${JSON.stringify(productForReOrder).replace(/"/g, "&quot;")})"
               class="w-full py-2 rounded-xl text-xs font-semibold transition-all hover:opacity-80 bg-primary/13 text-primary border border-primary"
             >
               Reorder
@@ -177,6 +187,8 @@ const showPastOrders = async () => {
       `,
     );
 
+    productForReOrder = [];
+
     const orderDate = document.getElementById(`order-date-${order.id}`);
     const pureOrderDate = new Date(order.order_date);
     orderDate.textContent = `${pureOrderDate.toLocaleDateString("en-US", { month: "long" })} ${pureOrderDate.getDay()} ,${pureOrderDate.getFullYear()}`;
@@ -184,6 +196,19 @@ const showPastOrders = async () => {
 
   // For convert icons to SVG
   lucide.createIcons();
+};
+
+const reOrder = (orderProducts) => {
+  const missingInCart = orderProducts.filter((orderProduct) => {
+    return !cart.some((cartproduct) => {
+      return cartproduct.id === orderProduct.id;
+    });
+  });
+
+  if (missingInCart.length) {
+    cart = [...cart, ...missingInCart];
+    saveCartInLocalStorage();
+  }
 };
 
 const showCurrentOrderProduct = () => {
