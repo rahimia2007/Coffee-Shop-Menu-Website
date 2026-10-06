@@ -66,10 +66,7 @@ const showProduct = (categoryId) => {
             class="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300 bg-background/52"
             >
             </div>
-            <span
-            class="absolute top-3 left-3 text-xs text-background bg-primary font-dmmono px-2.5 py-1 rounded-full font-medium"
-            >Best Seller</span
-            >
+            ${product.is_best_seller ? '<span class="absolute top-3 left-3 text-xs text-background bg-primary font-dmmono px-2.5 py-1 rounded-full font-medium">Best Seller</span>' : ""}
         </div>
         <div class="p-4">
             <h3 class="text-primary-text font-semibold mb-1 text-sm">
