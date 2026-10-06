@@ -28,6 +28,7 @@ const checkoutBtn = document.getElementById("checkout-btn");
 const checkoutHeaderProductLength = document.getElementById(
   "checkout-header-product-length",
 );
+const pastCheckoutModal = document.getElementById("past-checkout-modal");
 
 const discount = 0;
 
@@ -505,8 +506,17 @@ const finallyCheckout = async () => {
       cart = [];
       showCurrentOrderProduct();
       hideCheckoutModal();
+      showPastCheckoutModal();
     }
   }
+};
+
+const showPastCheckoutModal = () => {
+  pastCheckoutModal.classList.remove("hidden");
+
+  setTimeout(() => {
+    pastCheckoutModal.classList.add("hidden");
+  }, 3000);
 };
 
 openCartBtn.addEventListener("click", showShoppingCartModal);
