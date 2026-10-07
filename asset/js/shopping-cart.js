@@ -91,10 +91,11 @@ const showPastOrders = async () => {
   const productsPastOrder = await productsPastOrderRes.json();
   pastOrdersContent.innerHTML = "";
   let productForReOrder = [];
-  allPastOrders.forEach((order) => {
-    pastOrdersContent.insertAdjacentHTML(
-      "beforeend",
-      `
+  if (productsPastOrder.length) {
+    allPastOrders.forEach((order) => {
+      pastOrdersContent.insertAdjacentHTML(
+        "beforeend",
+        `
         <div class="rounded-xl border border-primary/15 bg-cards">
           <div class="w-full flex items-center justify-between p-4 text-lefl">
             <div>
@@ -186,15 +187,18 @@ const showPastOrders = async () => {
           </div>
         </div>
       `,
-    );
+      );
 
-    productForReOrder = [];
+      productForReOrder = [];
 
-    const orderDate = document.getElementById(`order-date-${order.id}`);
-    const pureOrderDate = new Date(order.order_date);
-    orderDate.textContent = `${pureOrderDate.toLocaleDateString("en-US", { month: "long" })} ${pureOrderDate.getDay()} ,${pureOrderDate.getFullYear()}`;
-  });
-
+      const orderDate = document.getElementById(`order-date-${order.id}`);
+      const pureOrderDate = new Date(order.order_date);
+      orderDate.textContent = `${pureOrderDate.toLocaleDateString("en-US", { month: "long" })} ${pureOrderDate.getDay()} ,${pureOrderDate.getFullYear()}`;
+    });
+  } else {
+    pastOrdersContent.innerHTML =
+      "<p class='text-secondary-text'>You haven't made any purchases yet.</p>";
+  }
   // For convert icons to SVG
   lucide.createIcons();
 };
