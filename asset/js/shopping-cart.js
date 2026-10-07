@@ -23,7 +23,8 @@ const takeoutBtn = document.getElementById("takeout-btn");
 const checkoutModalInputLable = document.getElementById(
   "checkout-modal-input-lable",
 );
-const checkoutModalInput = document.getElementById("checkout-modal-input");
+const takeoutInput = document.getElementById("takeout-input");
+const dineInInput = document.getElementById("dine-in-input");
 const checkoutBtn = document.getElementById("checkout-btn");
 const checkoutHeaderProductLength = document.getElementById(
   "checkout-header-product-length",
@@ -378,11 +379,14 @@ const showCheckoutModal = () => {
   checkoutHeaderProductLength.innerHTML = `
     ${productLength} item ·
     <span class="font-dmmono text-primary">$${totalPrice}</span>`;
+
+  showTablesInList();
 };
 
 const hideCheckoutModal = () => {
   checkoutModal.classList.add("hidden");
-  checkoutModalInput.value = "";
+  takeoutInput.value = "";
+  dineInInput.value = "";
 };
 
 const changeToDineIn = () => {
@@ -393,9 +397,10 @@ const changeToDineIn = () => {
     "flex flex-col items-center gap-2.5 py-5 rounded-2xl border transition-all text-secondary-text bg-cards border-primary/15 hover:text-primary hover:bg-primary/12 hover:border-primary cursor-pointer";
 
   checkoutModalInputLable.textContent = "Table Number";
-  checkoutModalInput.placeholder = "e.g. 12";
-  checkoutModalInput.type = "number";
-  checkoutModalInput.value = "";
+  takeoutInput.classList.add("hidden");
+  dineInInput.classList.remove("hidden");
+
+  showTablesInList();
 
   checkoutBtn.className =
     "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
@@ -409,12 +414,45 @@ const changeToTakeout = () => {
     "flex flex-col items-center gap-2.5 py-5 rounded-2xl border transition-all text-secondary-text bg-cards border-primary/15 hover:text-primary hover:bg-primary/12 hover:border-primary cursor-pointer";
 
   checkoutModalInputLable.textContent = "Delivery Address";
-  checkoutModalInput.placeholder = "address...";
-  checkoutModalInput.type = "text";
-  checkoutModalInput.value = "";
+  dineInInput.classList.add("hidden");
+  takeoutInput.classList.remove("hidden");
 
   checkoutBtn.className =
     "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
+};
+
+const showTablesInList = async () => {
+  const tableResponse = await fetch(
+    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/tables?select=*",
+    {
+      headers: {
+        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      },
+    },
+  );
+  const tables = await tableResponse.json();
+  dineInInput.innerHTML = "";
+  // tables.forEach((table) => {
+  //   dineInInput.insertAdjacentHTML(
+  //     "beforeend",
+  //     `
+  //     <option value="${table.id}" class="text-primary-text border border-primary/15">table ${table.table_number}</option>
+  //     `,
+  //   );
+  // });
+
+  dineInInput.insertAdjacentHTML(
+    "beforeend",
+    `
+    <option value="" class="text-primary-text border border-primary/15" disabled selected>Select the desired table.</option>
+    ${tables
+      .map((table) => {
+        return `<option value="${table.id}" class="text-primary-text border border-primary/15">table ${table.table_number}</option>`;
+      })
+      .join("")}
+    `,
+  );
 };
 
 const finallyCheckout = async () => {
@@ -551,13 +589,13 @@ closeCheckoutModalBtn.addEventListener("click", hideCheckoutModal);
 checkoutModalBg.addEventListener("click", hideCheckoutModal);
 dineInBtn.addEventListener("click", changeToDineIn);
 takeoutBtn.addEventListener("click", changeToTakeout);
-checkoutModalInput.addEventListener("keyup", () => {
-  if (checkoutModalInput.value.trim()) {
-    checkoutBtn.className =
-      "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-background bg-primary cursor-pointer";
-  } else {
-    checkoutBtn.className =
-      "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
-  }
-});
+// checkoutModalInput.addEventListener("keyup", () => {
+//   if (checkoutModalInput.value.trim()) {
+//     checkoutBtn.className =
+//       "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-background bg-primary cursor-pointer";
+//   } else {
+//     checkoutBtn.className =
+//       "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
+//   }
+// });
 checkoutBtn.addEventListener("click", finallyCheckout);
