@@ -97,7 +97,7 @@ const showPastOrders = async () => {
         "beforeend",
         `
         <div class="rounded-xl border border-primary/15 bg-cards">
-          <div class="w-full flex items-center justify-between p-4 text-lefl">
+          <div onclick="openAccordion('${order.id}')" class="w-full flex items-center justify-between p-4 text-lefl cursor-pointer">
             <div>
               <div class="flex items-center gap-2 mb-1">
                 <span
@@ -136,11 +136,11 @@ const showPastOrders = async () => {
               </span>
               <i
                 data-lucide="chevron-down"
-                class="w-4 h-4 text-placeholders rotate-180"
+                class="w-4 h-4 text-placeholders"
               ></i>
             </div>
           </div>
-          <div class="px-4 pb-4 pt-3 border-t text-primary/15">
+          <div id="order-${order.id}" class="invisible opacity-0 h-0 transition-all duration-300 overflow-hidden">
             <div class="space-y-1.5 mb-4">
               ${productsPastOrder
                 .filter((productOrder) => productOrder.order_id === order.id)
@@ -201,6 +201,22 @@ const showPastOrders = async () => {
   }
   // For convert icons to SVG
   lucide.createIcons();
+};
+
+const openAccordion = (orderId) => {
+  const orderContent = document.getElementById(`order-${orderId}`);
+  console.log(orderId);
+  console.log(orderContent);
+  if (
+    orderContent.className ===
+    "px-4 pb-4 pt-3 border-t text-primary/15 transition-all duration-300 opacity-100 overflow-hidden"
+  ) {
+    orderContent.className =
+      "invisible opacity-0 h-0 transition-all duration-300 overflow-hidden";
+  } else {
+    orderContent.className =
+      "px-4 pb-4 pt-3 border-t text-primary/15 transition-all duration-300 opacity-100 overflow-hidden";
+  }
 };
 
 const reOrder = (orderProducts) => {
