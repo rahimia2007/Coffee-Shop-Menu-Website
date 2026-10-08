@@ -206,8 +206,7 @@ const showPastOrders = async () => {
 
 const openAccordion = (orderId) => {
   const orderContent = document.getElementById(`order-${orderId}`);
-  console.log(orderId);
-  console.log(orderContent);
+
   if (
     orderContent.className ===
     "px-4 pb-4 pt-3 border-t text-primary/15 transition-all duration-300 opacity-100 overflow-hidden"
@@ -399,6 +398,7 @@ const changeToDineIn = () => {
   checkoutModalInputLable.textContent = "Table Number";
   takeoutInput.classList.add("hidden");
   dineInInput.classList.remove("hidden");
+  takeoutInput.value = "";
 
   showTablesInList();
 
@@ -433,14 +433,6 @@ const showTablesInList = async () => {
   );
   const tables = await tableResponse.json();
   dineInInput.innerHTML = "";
-  // tables.forEach((table) => {
-  //   dineInInput.insertAdjacentHTML(
-  //     "beforeend",
-  //     `
-  //     <option value="${table.id}" class="text-primary-text border border-primary/15">table ${table.table_number}</option>
-  //     `,
-  //   );
-  // });
 
   dineInInput.insertAdjacentHTML(
     "beforeend",
@@ -457,68 +449,31 @@ const showTablesInList = async () => {
 
 const finallyCheckout = async () => {
   let deliveryDetails = null;
-  if (checkoutModalInput.value.trim()) {
-    if (checkoutModalInput.type == "number") {
-      console.log("number");
+  if (takeoutInput.value.trim() || dineInInput.value) {
+    if (takeoutInput.className.includes("hidden")) {
+      deliveryDetails = { table_id: dineInInput.value };
     } else {
-      deliveryDetails = { delivery_address: checkoutModalInput.value };
+      deliveryDetails = { delivery_address: takeoutInput.value.trim() };
     }
-  }
 
-  // set Delivery Details to server
-  await fetch(
-    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/delivery_details",
-    {
-      method: "POST",
-      headers: {
-        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        Authorization: " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        "Content-Type": "application/json",
-        Prefer: "return=minimal",
+    // set Delivery Details to server
+    await fetch(
+      "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/delivery_details",
+      {
+        method: "POST",
+        headers: {
+          apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          Authorization:
+            " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          "Content-Type": "application/json",
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify(deliveryDetails),
       },
-      body: JSON.stringify(deliveryDetails),
-    },
-  );
-
-  const newDeliveryDetailsRes = await fetch(
-    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/delivery_details",
-    {
-      headers: {
-        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        Authorization: " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-      },
-    },
-  );
-
-  const newDeliveryDetails = await newDeliveryDetailsRes.json();
-  const findDeliveryDetail = newDeliveryDetails.find((findDeliveryDetail) => {
-    return (
-      findDeliveryDetail.delivery_address ===
-        deliveryDetails.delivery_address ||
-      findDeliveryDetail.table_id === deliveryDetails.table_id
     );
-  });
 
-  if (findDeliveryDetail) {
-    // set Orders to server
-    const orders = {
-      customer_id: "7cb2db73-8d12-4568-8dda-57eb2a1b224a",
-      delivery_detail_id: findDeliveryDetail.id,
-      is_delivered: false,
-    };
-    await fetch("https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders", {
-      method: "POST",
-      headers: {
-        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        Authorization: " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        "Content-Type": "application/json",
-        Prefer: "return=minimal",
-      },
-      body: JSON.stringify(orders),
-    });
-
-    const newOrdersRes = await fetch(
-      "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders",
+    const newDeliveryDetailsRes = await fetch(
+      "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/delivery_details",
       {
         headers: {
           apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
@@ -528,43 +483,83 @@ const finallyCheckout = async () => {
       },
     );
 
-    const newOrders = await newOrdersRes.json();
-    const findOrder = newOrders.find((newOrder) => {
-      return newOrder.delivery_detail_id === findDeliveryDetail.id;
+    const newDeliveryDetails = await newDeliveryDetailsRes.json();
+    const findDeliveryDetail = newDeliveryDetails.find((findDeliveryDetail) => {
+      return (
+        findDeliveryDetail.delivery_address ===
+          deliveryDetails.delivery_address ||
+        findDeliveryDetail.table_id === deliveryDetails.table_id
+      );
     });
 
-    if (findOrder) {
-      // add Cart Product to server
-      cart.forEach(async (product) => {
-        const newProduct = {
-          order_id: findOrder.id,
-          product_id: product.id,
-          quantity: +product.quantity,
-          size: product.size,
-          unit_price: product.price,
-        };
-
-        await fetch(
-          "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/order_items",
-          {
-            method: "POST",
-            headers: {
-              apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-              Authorization:
-                " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-              "Content-Type": "application/json",
-              Prefer: "return=minimal",
-            },
-            body: JSON.stringify(newProduct),
-          },
-        );
+    if (findDeliveryDetail) {
+      // set Orders to server
+      const orders = {
+        customer_id: "7cb2db73-8d12-4568-8dda-57eb2a1b224a",
+        delivery_detail_id: findDeliveryDetail.id,
+        is_delivered: false,
+      };
+      await fetch("https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders", {
+        method: "POST",
+        headers: {
+          apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          Authorization:
+            " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          "Content-Type": "application/json",
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify(orders),
       });
 
-      localStorage.clear();
-      cart = [];
-      showCurrentOrderProduct();
-      hideCheckoutModal();
-      showPastCheckoutModal();
+      const newOrdersRes = await fetch(
+        "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders",
+        {
+          headers: {
+            apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+            Authorization:
+              " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          },
+        },
+      );
+
+      const newOrders = await newOrdersRes.json();
+      const findOrder = newOrders.find((newOrder) => {
+        return newOrder.delivery_detail_id === findDeliveryDetail.id;
+      });
+
+      if (findOrder) {
+        // add Cart Product to server
+        cart.forEach(async (product) => {
+          const newProduct = {
+            order_id: findOrder.id,
+            product_id: product.id,
+            quantity: +product.quantity,
+            size: product.size,
+            unit_price: product.price,
+          };
+
+          await fetch(
+            "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/order_items",
+            {
+              method: "POST",
+              headers: {
+                apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+                Authorization:
+                  " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+                "Content-Type": "application/json",
+                Prefer: "return=minimal",
+              },
+              body: JSON.stringify(newProduct),
+            },
+          );
+        });
+
+        localStorage.clear();
+        cart = [];
+        showCurrentOrderProduct();
+        hideCheckoutModal();
+        showPastCheckoutModal();
+      }
     }
   }
 };
@@ -575,6 +570,16 @@ const showPastCheckoutModal = () => {
   setTimeout(() => {
     pastCheckoutModal.classList.add("hidden");
   }, 3000);
+};
+
+const activeCheckoutBtn = () => {
+  if (dineInInput.value || takeoutInput.value.trim()) {
+    checkoutBtn.className =
+      "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-background bg-primary cursor-pointer";
+  } else {
+    checkoutBtn.className =
+      "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
+  }
 };
 
 openCartBtn.addEventListener("click", showShoppingCartModal);
@@ -589,13 +594,6 @@ closeCheckoutModalBtn.addEventListener("click", hideCheckoutModal);
 checkoutModalBg.addEventListener("click", hideCheckoutModal);
 dineInBtn.addEventListener("click", changeToDineIn);
 takeoutBtn.addEventListener("click", changeToTakeout);
-// checkoutModalInput.addEventListener("keyup", () => {
-//   if (checkoutModalInput.value.trim()) {
-//     checkoutBtn.className =
-//       "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-background bg-primary cursor-pointer";
-//   } else {
-//     checkoutBtn.className =
-//       "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
-//   }
-// });
+takeoutInput.addEventListener("keyup", activeCheckoutBtn);
+dineInInput.addEventListener("change", activeCheckoutBtn);
 checkoutBtn.addEventListener("click", finallyCheckout);
