@@ -136,8 +136,9 @@ const showPastOrders = async () => {
                   }, 0)}
               </span>
               <i
+                id="past-order-accordion-icon-${order.id}"
                 data-lucide="chevron-down"
-                class="w-4 h-4 text-placeholders"
+                class="w-4 h-4 text-placeholders transition-all duration-300"
               ></i>
             </div>
           </div>
@@ -206,6 +207,9 @@ const showPastOrders = async () => {
 
 const openAccordion = (orderId) => {
   const orderContent = document.getElementById(`order-${orderId}`);
+  const pastOrderAccordionIcon = document.getElementById(
+    `past-order-accordion-icon-${orderId}`,
+  );
 
   if (
     orderContent.className ===
@@ -213,9 +217,11 @@ const openAccordion = (orderId) => {
   ) {
     orderContent.className =
       "invisible opacity-0 h-0 transition-all duration-300 overflow-hidden";
+    pastOrderAccordionIcon.classList.remove("rotate-180");
   } else {
     orderContent.className =
       "px-4 pb-4 pt-3 border-t text-primary/15 transition-all duration-300 opacity-100 overflow-hidden";
+    pastOrderAccordionIcon.classList.add("rotate-180");
   }
 };
 
