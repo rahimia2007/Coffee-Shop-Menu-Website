@@ -33,7 +33,7 @@ const pastCheckoutModal = document.getElementById("past-checkout-modal");
 
 const discount = 0;
 
-function showShoppingCartModal() {
+const showShoppingCartModal = () => {
   shoppingCartModal.classList.remove("invisible");
   shoppingCartModal.classList.remove("pointer-events-none");
   shoppingCartContent.classList.remove("translate-x-full");
@@ -41,16 +41,16 @@ function showShoppingCartModal() {
 
   showCurrentOrder();
   CalculatingTotalPrice();
-}
+};
 
-function hideShoppingCartModal() {
+const hideShoppingCartModal = () => {
   shoppingCartModal.classList.add("invisible");
   shoppingCartModal.classList.add("pointer-events-none");
   shoppingCartContent.classList.remove("translate-x-0");
   shoppingCartContent.classList.add("translate-x-full");
-}
+};
 
-function showCurrentOrder() {
+const showCurrentOrder = () => {
   pastOrdersContent.classList.add("hidden");
   currentOrderContent.classList.remove("hidden");
   currentOrderBtn.className =
@@ -58,7 +58,7 @@ function showCurrentOrder() {
   pastOrdersBtn.className =
     "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text";
   showCurrentOrderProduct();
-}
+};
 
 const showPastOrders = async () => {
   pastOrdersContent.classList.remove("hidden");

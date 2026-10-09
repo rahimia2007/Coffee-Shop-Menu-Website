@@ -1,7 +1,7 @@
 const menuToggle = document.getElementById("menu-toggle");
 const mobileNav = document.getElementById("mobile-nav");
 
-function menuHandler() {
+const menuHandler = () => {
   if (mobileNav.className.includes("opacity-0")) {
     mobileNav.classList.remove("opacity-0");
     mobileNav.classList.add("opacity-100");
@@ -28,6 +28,6 @@ function menuHandler() {
     // For convert icons to SVG
     lucide.createIcons();
   }
-}
+};
 
 menuToggle.addEventListener("click", menuHandler);
