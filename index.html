@@ -538,7 +538,7 @@
           >
           <button
             id="product-modal-close"
-            class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center border border-white/20 text-white bg-background/65 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer"
+            class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center border border-white/20 text-white bg-background/65 backdrop-blur-sm hover:bg-background/80 transition-colors cursor-pointer"
           >
             <i data-lucide="x" class="w-4 h-4 text-white"></i>
           </button>
@@ -572,7 +572,7 @@
               class="text-xs text-placeholders font-dmmono uppercase tracking-wider mb-2.5 block"
               >Size</span
             >
-            <div class="grid grid-cols-3 gap-2">
+            <div id="size-btn-wrapper" class="grid grid-cols-3 gap-2">
               <button
                 class="py-2.5 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text cursor-pointer"
               >
@@ -594,7 +594,7 @@
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-3 rounded-xl px-1.5 bg-cards">
               <button
-                id="product-page-increase-btn"
+                id="product-page-reduction-btn"
                 class="w-8 h-10 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
               >
                 <i data-lucide="minus" class="w-3.5 h-3.5"></i>
@@ -605,7 +605,7 @@
                 >1</span
               >
               <button
-                id="product-page-reduction-btn"
+                id="product-page-increase-btn"
                 class="w-8 h-10 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
               >
                 <i data-lucide="plus" class="w-3.5 h-3.5"></i>
@@ -916,5 +916,6 @@
 
     <script src="./asset/js/script.js"></script>
     <script src="./asset/js/header-menu.js"></script>
+    <script src="./asset/js/product-page-modal.js"></script>
   </body>
 </html>
