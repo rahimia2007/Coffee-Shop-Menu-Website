@@ -250,7 +250,7 @@ const showCurrentOrderProduct = () => {
             <div class="flex gap-3 mb-3">
               <img
                 class="size-12 rounded-lg object-cover shrink-0 bg-[#3c3028]"
-                src="../asset/img/product-img/${product.image_url}"
+                src="/asset/img/product-img/${product.image_url}"
                 alt=""
               />
               <div class="flex-1 min-w-0">

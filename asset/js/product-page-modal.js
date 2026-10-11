@@ -32,7 +32,7 @@ const showProductModal = (productId) => {
 
   productPageImg.setAttribute(
     "src",
-    `../asset/img/product-img/${findProduct.image_url}`,
+    `/asset/img/product-img/${findProduct.image_url}`,
   );
   productPageTitle.textContent = findProduct.name;
   productPageDescription.textContent = findProduct.description;
