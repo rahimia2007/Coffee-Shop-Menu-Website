@@ -664,78 +664,7 @@
           id="past-orders-content"
           class="flex-1 overflow-y-auto p-4 space-y-2 hidden"
         >
-          <!-- Open -->
-          <div class="rounded-xl border border-primary/15 bg-cards">
-            <div class="w-full flex items-center justify-between p-4 text-left">
-              <div>
-                <div class="flex items-center gap-2 mb-1">
-                  <span
-                    class="text-sm font-dmmono font-semibold text-primary-text"
-                    >ORD-2847</span
-                  >
-                  <span
-                    class="text-xs px-2 py-0.5 rounded-full font-medium font-dmmono bg-[#4ade80]/13 text-[#4ade80]"
-                    >Delivered</span
-                  >
-                </div>
-                <p class="text-xs text-placeholders">July 28, 2026</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="font-dmmono text-sm font-bold text-primary"
-                  >$13.00</span
-                >
-                <i
-                  data-lucide="chevron-down"
-                  class="w-4 h-4 text-placeholders"
-                ></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Close -->
-          <div class="rounded-xl border border-primary/15 bg-cards">
-            <div class="w-full flex items-center justify-between p-4 text-lefl">
-              <div>
-                <div class="flex items-center gap-2 mb-1">
-                  <span
-                    class="text-sm font-dmmono font-semibold text-primary-text"
-                    >ORD-2847</span
-                  >
-                  <span
-                    class="text-xs px-2 py-0.5 rounded-full font-medium font-dmmono bg-[#4ade80]/13 text-[#4ade80]"
-                    >Delivered</span
-                  >
-                </div>
-                <p class="text-xs text-placeholders">July 28, 2026</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="font-dmmono text-sm font-bold text-primary"
-                  >$13.00</span
-                >
-                <i
-                  data-lucide="chevron-down"
-                  class="w-4 h-4 text-placeholders"
-                ></i>
-              </div>
-            </div>
-            <div class="px-4 pb-4 pt-3 border-t text-primary/15">
-              <div class="space-y-1.5 mb-4">
-                <div class="flex justify-between text-xs">
-                  <span class="text-secondary-text">2× Espresso Romano</span>
-                  <span class="font-dmmono text-primary-text">$9.00</span>
-                </div>
-                <div class="flex justify-between text-xs">
-                  <span class="text-secondary-text">2× Espresso Romano</span>
-                  <span class="font-dmmono text-primary-text">$9.00</span>
-                </div>
-              </div>
-              <button
-                class="w-full py-2 rounded-xl text-xs font-semibold transition-all hover:opacity-80 bg-primary/13 text-primary border border-primary"
-              >
-                Reorder
-              </button>
-            </div>
-          </div>
+          <!-- Load From JS -->
         </div>
 
         <!-- Current Order -->
@@ -754,7 +683,7 @@
           <div class="space-y-1.5 mb-4">
             <div class="flex justify-between text-sm text-secondary-text">
               <span>Subtotal</span>
-              <span class="font-dmmono">$4.50</span>
+              <span id="total-price" class="font-dmmono">$4.50</span>
             </div>
             <div class="flex justify-between text-sm text-secondary-text">
               <span>Tax (8.75%)</span>
@@ -764,10 +693,13 @@
               class="flex justify-between text-sm font-semibold pt-2.5 mt-2 border-t border-primary/15 text-primary-text"
             >
               <span>Total</span>
-              <span class="font-dmmono text-primary">$4.89</span>
+              <span id="discounted-price" class="font-dmmono text-primary"
+                >$4.89</span
+              >
             </div>
           </div>
           <button
+            id="proceed-checkout-btn"
             class="w-full py-3.5 rounded-xl font-semibold text-sm bg-primary text-background transition-all hover:opacity-90 active:scale-95 cursor-pointer"
           >
             Proceed to Checkout
@@ -917,5 +849,6 @@
     <script src="./asset/js/script.js"></script>
     <script src="./asset/js/header-menu.js"></script>
     <script src="./asset/js/product-page-modal.js"></script>
+    <script src="./asset/js/shopping-cart.js"></script>
   </body>
 </html>
