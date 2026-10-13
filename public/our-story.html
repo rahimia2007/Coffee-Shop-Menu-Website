@@ -416,78 +416,7 @@
           id="past-orders-content"
           class="flex-1 overflow-y-auto p-4 space-y-2 hidden"
         >
-          <!-- Open -->
-          <div class="rounded-xl border border-primary/15 bg-cards">
-            <div class="w-full flex items-center justify-between p-4 text-left">
-              <div>
-                <div class="flex items-center gap-2 mb-1">
-                  <span
-                    class="text-sm font-dmmono font-semibold text-primary-text"
-                    >ORD-2847</span
-                  >
-                  <span
-                    class="text-xs px-2 py-0.5 rounded-full font-medium font-dmmono bg-[#4ade80]/13 text-[#4ade80]"
-                    >Delivered</span
-                  >
-                </div>
-                <p class="text-xs text-placeholders">July 28, 2026</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="font-dmmono text-sm font-bold text-primary"
-                  >$13.00</span
-                >
-                <i
-                  data-lucide="chevron-down"
-                  class="w-4 h-4 text-placeholders"
-                ></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Close -->
-          <div class="rounded-xl border border-primary/15 bg-cards">
-            <div class="w-full flex items-center justify-between p-4 text-lefl">
-              <div>
-                <div class="flex items-center gap-2 mb-1">
-                  <span
-                    class="text-sm font-dmmono font-semibold text-primary-text"
-                    >ORD-2847</span
-                  >
-                  <span
-                    class="text-xs px-2 py-0.5 rounded-full font-medium font-dmmono bg-[#4ade80]/13 text-[#4ade80]"
-                    >Delivered</span
-                  >
-                </div>
-                <p class="text-xs text-placeholders">July 28, 2026</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="font-dmmono text-sm font-bold text-primary"
-                  >$13.00</span
-                >
-                <i
-                  data-lucide="chevron-down"
-                  class="w-4 h-4 text-placeholders"
-                ></i>
-              </div>
-            </div>
-            <div class="px-4 pb-4 pt-3 border-t text-primary/15">
-              <div class="space-y-1.5 mb-4">
-                <div class="flex justify-between text-xs">
-                  <span class="text-secondary-text">2× Espresso Romano</span>
-                  <span class="font-dmmono text-primary-text">$9.00</span>
-                </div>
-                <div class="flex justify-between text-xs">
-                  <span class="text-secondary-text">2× Espresso Romano</span>
-                  <span class="font-dmmono text-primary-text">$9.00</span>
-                </div>
-              </div>
-              <button
-                class="w-full py-2 rounded-xl text-xs font-semibold transition-all hover:opacity-80 bg-primary/13 text-primary border border-primary"
-              >
-                Reorder
-              </button>
-            </div>
-          </div>
+          <!-- Load From JS -->
         </div>
 
         <!-- Current Order -->
@@ -496,7 +425,6 @@
           class="flex-1 overflow-y-auto p-4 space-y-3"
         >
           <!-- load from js -->
-           
         </div>
 
         <!-- Price Total -->
@@ -507,7 +435,7 @@
           <div class="space-y-1.5 mb-4">
             <div class="flex justify-between text-sm text-secondary-text">
               <span>Subtotal</span>
-              <span class="font-dmmono">$4.50</span>
+              <span id="total-price" class="font-dmmono">$4.50</span>
             </div>
             <div class="flex justify-between text-sm text-secondary-text">
               <span>Tax (8.75%)</span>
@@ -517,10 +445,13 @@
               class="flex justify-between text-sm font-semibold pt-2.5 mt-2 border-t border-primary/15 text-primary-text"
             >
               <span>Total</span>
-              <span class="font-dmmono text-primary">$4.89</span>
+              <span id="discounted-price" class="font-dmmono text-primary"
+                >$4.89</span
+              >
             </div>
           </div>
           <button
+            id="proceed-checkout-btn"
             class="w-full py-3.5 rounded-xl font-semibold text-sm bg-primary text-background transition-all hover:opacity-90 active:scale-95 cursor-pointer"
           >
             Proceed to Checkout
@@ -533,6 +464,134 @@
       ></div>
     </div>
 
+    <!-- Checkout -->
+    <div
+      id="checkout-modal"
+      class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden"
+    >
+      <div
+        id="checkout-modal-bg"
+        class="absolute inset-0 bg-background/82 backdrop-blur-sm"
+      ></div>
+      <div
+        class="relative z-10 rounded-3xl overflow-hidden w-full max-w-md border border-primary/15 bg-elevated-cards"
+      >
+        <div
+          class="flex items-center justify-between px-6 py-5 border-b border-primary/15"
+        >
+          <div>
+            <h3 class="text-xl text-primary-text font-bold font-Playfair">
+              Checkout
+            </h3>
+            <span
+              id="checkout-header-product-length"
+              class="text-xs mt-0.5 text-placeholders"
+            >
+              <!-- Load from js -->
+            </span>
+          </div>
+          <button
+            id="close-checkout-modal-btn"
+            class="w-8 h-8 rounded-full flex items-center justify-center border border-primary/15 transition-all hover:border-amber-600/40 text-secondary-text cursor-pointer"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="p-6 space-y-6">
+          <div>
+            <h4
+              class="text-xs font-dmmono uppercase tracking-wider mb-3 text-placeholders"
+            >
+              Order Type
+            </h4>
+            <div class="grid grid-cols-2 gap-3">
+              <div
+                id="dine-in-btn"
+                class="flex flex-col items-center gap-2.5 py-5 rounded-2xl border transition-all text-primary bg-primary/12 border-primary cursor-pointer"
+              >
+                <i data-lucide="utensils-crossed" class="w-5 h-5"></i>
+                <span class="text-sm font-semibold">Dine In</span>
+              </div>
+              <div
+                id="takeout-btn"
+                class="flex flex-col items-center gap-2.5 py-5 rounded-2xl border transition-all text-secondary-text bg-cards border-primary/15 hover:text-primary hover:bg-primary/12 hover:border-primary cursor-pointer"
+              >
+                <i data-lucide="package" class="w-5 h-5"></i>
+                <span class="text-sm font-semibold">Takeout</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4
+              id="checkout-modal-input-lable"
+              class="text-xs font-dmmono uppercase tracking-wider mb-3 text-placeholders"
+            >
+              Table Number
+            </h4>
+            <input
+              id="takeout-input"
+              type="text"
+              placeholder="Address..."
+              class="w-full px-4 py-3 rounded-xl text-sm text-primary-text bg-cards outline-none border border-primary/15 transition-colors focus:border-amber-600/60 placeholder:opacity-40 hidden"
+            />
+
+            <select
+              name="table-list"
+              id="dine-in-input"
+              class="w-full px-4 py-3 rounded-xl text-sm text-primary-text bg-cards outline-none border border-primary/15 transition-colors focus:border-amber-600/60 placeholder:opacity-40"
+            ></select>
+          </div>
+
+          <div class="rounded-xl p-4 border bg-cards border-primary/15">
+            <div class="flex justify-between text-sm">
+              <span class="text-secondary-text">Order total</span>
+              <span class="font-dmmono font-bold text-primary">$7.07</span>
+            </div>
+            <div class="flex justify-between text-xs mt-1 text-placeholders">
+              <span>1 item</span>
+              <span>Incl. 8.75% tax</span>
+            </div>
+          </div>
+
+          <button
+            id="checkout-btn"
+            class="w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25"
+          >
+            Place Order · $7.07
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Past Checkout -->
+    <div
+      id="past-checkout-modal"
+      class="fixed inset-0 z-60 p-4 flex items-center justify-center hidden"
+    >
+      <div
+        class="absolute inset-0 bg-background/82 backdrop-blur-sm z-10"
+      ></div>
+      <div
+        class="relative z-10 rounded-3xl overflow-hidden w-full max-w-md border border-primary/15 bg-elevated-cards flex flex-col items-center justify-center py-16 px-8 text-center"
+      >
+        <div
+          class="w-16 h-16 rounded-full flex items-center justify-center mb-5 bg-primary/15"
+        >
+          <i data-lucide="circle-check-big" class="w-8 h-8 text-primary"></i>
+        </div>
+
+        <h3 class="text-2xl font-bold mb-2 font-Playfair text-primary-text">
+          Order Placed!
+        </h3>
+
+        <p class="text-sm tex-secondary-text">
+          We will deliver it to you soon.
+        </p>
+      </div>
+    </div>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>
@@ -540,6 +599,9 @@
     </script>
 
     <script src="../asset/js/header-menu.js"></script>
+    <script>
+      let cart = JSON.parse(localStorage.getItem("cart"));
+    </script>
     <script src="../asset/js/shopping-cart.js"></script>
   </body>
 </html>
