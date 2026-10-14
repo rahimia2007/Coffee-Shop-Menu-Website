@@ -441,13 +441,15 @@ const showTablesInList = async () => {
     },
   );
   const tables = await tableResponse.json();
+  const emptyTables = tables.filter((table) => table.is_empty === true);
+
   dineInInput.innerHTML = "";
 
   dineInInput.insertAdjacentHTML(
     "beforeend",
     `
     <option value="" class="text-primary-text border border-primary/15" disabled selected>Select the desired table.</option>
-    ${tables
+    ${emptyTables
       .map((table) => {
         return `<option value="${table.id}" class="text-primary-text border border-primary/15">table ${table.table_number}</option>`;
       })
