@@ -568,6 +568,25 @@ const finallyCheckout = async () => {
         showCurrentOrderProduct();
         hideCheckoutModal();
         showPastCheckoutModal();
+
+        if (findDeliveryDetail.table_id) {
+          fetch(
+            `https://bqpbxsyxslyednegacov.supabase.co/rest/v1/tables?id=eq.${findDeliveryDetail.table_id}`,
+            {
+              method: "PATCH",
+              headers: {
+                apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+                Authorization:
+                  "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+                "Content-Type": "application/json",
+                Prefer: "return=representation",
+              },
+              body: JSON.stringify({
+                is_empty: false,
+              }),
+            },
+          );
+        }
       }
     }
   }
