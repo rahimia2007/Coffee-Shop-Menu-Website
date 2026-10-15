@@ -29,6 +29,12 @@ const checkoutBtn = document.getElementById("checkout-btn");
 const checkoutHeaderProductLength = document.getElementById(
   "checkout-header-product-length",
 );
+const checkoutFooterProductPrice = document.getElementById(
+  "checkout-footer-product-price",
+);
+const checkoutFooterProductLength = document.getElementById(
+  "checkout-footer-product-length",
+);
 const pastCheckoutModal = document.getElementById("past-checkout-modal");
 
 const discount = 0;
@@ -387,6 +393,10 @@ const showCheckoutModal = () => {
   checkoutHeaderProductLength.innerHTML = `
     ${productLength} item ·
     <span class="font-dmmono text-primary">$${totalPrice}</span>`;
+
+  checkoutFooterProductPrice.innerHTML = `$${totalPrice}`;
+    
+  checkoutFooterProductLength.innerHTML = `${productLength} item`;
 
   showTablesInList();
 };
