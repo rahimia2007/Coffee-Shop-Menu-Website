@@ -372,6 +372,9 @@ const CalculatingTotalPrice = () => {
 };
 
 const showCheckoutModal = () => {
+  checkoutBtn.className =
+    "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
+
   checkoutModal.classList.remove("hidden");
 
   let productLength = 0;
