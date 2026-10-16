@@ -35,9 +35,15 @@ const checkoutFooterProductPrice = document.getElementById(
 const checkoutFooterProductLength = document.getElementById(
   "checkout-footer-product-length",
 );
+const tax = document.getElementById("tax");
 const pastCheckoutModal = document.getElementById("past-checkout-modal");
 
 const discount = 0;
+
+let taxAmount = 0;
+
+let productLength = 0;
+let totalPrice = 0;
 
 const showShoppingCartModal = () => {
   shoppingCartModal.classList.remove("invisible");
@@ -383,8 +389,8 @@ const showCheckoutModal = () => {
 
   checkoutModal.classList.remove("hidden");
 
-  let productLength = 0;
-  let totalPrice = 0;
+  productLength = 0;
+  totalPrice = 0;
 
   cart.forEach((product) => {
     productLength += +product.quantity;
@@ -395,8 +401,10 @@ const showCheckoutModal = () => {
     <span class="font-dmmono text-primary">$${totalPrice}</span>`;
 
   checkoutFooterProductPrice.innerHTML = `$${totalPrice}`;
-    
+
   checkoutFooterProductLength.innerHTML = `${productLength} item`;
+
+  checkoutBtn.innerHTML = `Place Order · $${totalPrice - (totalPrice * taxAmount) / 100}`;
 
   showTablesInList();
 };
@@ -423,6 +431,12 @@ const changeToDineIn = () => {
 
   checkoutBtn.className =
     "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
+
+  taxAmount = 0;
+
+  tax.innerHTML = `Incl. ${taxAmount}% tax`;
+
+  checkoutBtn.innerHTML = `Place Order · $${totalPrice - (totalPrice * taxAmount) / 100}`;
 };
 
 const changeToTakeout = () => {
@@ -438,6 +452,12 @@ const changeToTakeout = () => {
 
   checkoutBtn.className =
     "w-full py-4 rounded-xl font-semibold text-sm transition-all active:scale-95 text-placeholders bg-primary/25";
+
+  taxAmount = 8.75;
+
+  tax.innerHTML = `Incl. ${taxAmount}% packaging fee`;
+
+  checkoutBtn.innerHTML = `Place Order · $${totalPrice - (totalPrice * taxAmount) / 100}`;
 
   // To return to the default value
   showTablesInList();
