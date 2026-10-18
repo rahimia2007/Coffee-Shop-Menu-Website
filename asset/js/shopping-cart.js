@@ -9,7 +9,7 @@ const pastOrdersContent = document.getElementById("past-orders-content");
 const currentOrderContent = document.getElementById("current-order-content");
 const priceTotalContent = document.getElementById("price-total-content");
 const totalPriceEl = document.getElementById("total-price");
-const discountedPriceEl = document.getElementById("discounted-price");
+
 const shoppingCartBg = document.getElementById("shopping-cart-bg");
 const proceedCheckoutBtn = document.getElementById("proceed-checkout-btn");
 
@@ -37,8 +37,6 @@ const checkoutFooterProductLength = document.getElementById(
 );
 const tax = document.getElementById("tax");
 const pastCheckoutModal = document.getElementById("past-checkout-modal");
-
-const discount = 0;
 
 let taxAmount = 0;
 
@@ -376,11 +374,6 @@ const CalculatingTotalPrice = () => {
     totalPrice += product.price * product.quantity;
   });
   totalPriceEl.textContent = `$${totalPrice}`;
-  if (discount) {
-    discountedPriceEl.textContent = `$${totalPrice - (totalPrice * discount) / 100}`;
-  } else {
-    discountedPriceEl.textContent = `$${totalPrice}`;
-  }
 };
 
 const showCheckoutModal = () => {

@@ -680,24 +680,13 @@
           id="price-total-content"
           class="p-5 border-t border-primary/15 shrink-0"
         >
-          <div class="space-y-1.5 mb-4">
-            <div class="flex justify-between text-sm text-secondary-text">
-              <span>Subtotal</span>
-              <span id="total-price" class="font-dmmono">$4.50</span>
-            </div>
-            <div class="flex justify-between text-sm text-secondary-text">
-              <span>Tax (8.75%)</span>
-              <span class="font-dmmono">$0.39</span>
-            </div>
-            <div
-              class="flex justify-between text-sm font-semibold pt-2.5 mt-2 border-t border-primary/15 text-primary-text"
-            >
-              <span>Total</span>
-              <span id="discounted-price" class="font-dmmono text-primary"
-                >$4.89</span
-              >
-            </div>
+          <div
+            class="flex justify-between text-sm space-y-1.5 mb-4 font-semibold text-primary-text"
+          >
+            <span>Total</span>
+            <span id="total-price" class="font-dmmono text-primary">$4.89</span>
           </div>
+
           <button
             id="proceed-checkout-btn"
             class="w-full py-3.5 rounded-xl font-semibold text-sm bg-primary text-background transition-all hover:opacity-90 active:scale-95 cursor-pointer"
@@ -795,7 +784,11 @@
           <div class="rounded-xl p-4 border bg-cards border-primary/15">
             <div class="flex justify-between text-sm">
               <span class="text-secondary-text">Order total</span>
-              <span id="checkout-footer-product-price" class="font-dmmono font-bold text-primary">$7.07</span>
+              <span
+                id="checkout-footer-product-price"
+                class="font-dmmono font-bold text-primary"
+                >$7.07</span
+              >
             </div>
             <div class="flex justify-between text-xs mt-1 text-placeholders">
               <span id="checkout-footer-product-length">1 item</span>
