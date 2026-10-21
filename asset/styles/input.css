@@ -29,6 +29,7 @@
     @apply max-w-6xl mx-auto px-6;
   }
   .p {
-    background: #c17a3a22;
+    background: rgba(248, 113, 113, 0.122);
+    color: #f87171;
   }
 }
