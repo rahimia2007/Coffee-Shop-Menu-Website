@@ -29,7 +29,7 @@ const showsignInSection = () => {
   createAccountSection.classList.add("hidden");
 };
 
-const showCreatAccountSection = () => {
+const showCreateAccountSection = () => {
   createAccountBtn.className =
     "flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all bg-primary text-background";
   signInBtn.className =
@@ -45,5 +45,5 @@ showSignInBtns.forEach((showSignInBtn) => {
 signInModalCloseBtn.addEventListener("click", hideSignInModal);
 signInModalBg.addEventListener("click", hideSignInModal);
 signInBtn.addEventListener("click", showsignInSection);
-createAccountBtn.addEventListener("click", showCreatAccountSection);
-createOneAccountBtn.addEventListener("click", showCreatAccountSection);
+createAccountBtn.addEventListener("click", showCreateAccountSection);
+createOneAccountBtn.addEventListener("click", showCreateAccountSection);
