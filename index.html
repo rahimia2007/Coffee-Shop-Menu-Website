@@ -61,6 +61,7 @@
         <div class="flex items-center justify-center gap-3">
           <!-- Sign In BTN -->
           <div
+            id="show-sign-in-btn"
             class="hidden md:flex items-center justify-center bg-primary/5 text-primary border border-primary/25 gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
           >
             <i data-lucide="user" class="w-4 h-4 text-primary"></i>
@@ -128,6 +129,7 @@
           </ul>
 
           <button
+            id="show-sign-in-btn"
             class="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all bg-primary/8 text-primary mt-4 cursor-pointer hover:opacity-90 active:scale-95"
           >
             <i data-lucide="user" class="w-4 h-4"></i>
@@ -849,8 +851,14 @@
     </div>
 
     <!-- Sign In & Create Account -->
-    <div class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden">
-      <div class="absolute inset-0 bg-background/82 backdrop-blur-sm"></div>
+    <div
+      id="sign-in-modal"
+      class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden"
+    >
+      <div
+        id="sign-in-modal-bg"
+        class="absolute inset-0 bg-background/82 backdrop-blur-sm"
+      ></div>
 
       <div
         class="relative z-10 rounded-3xl overflow-hidden w-full max-w-sm border border-primary/15 bg-elevated-cards"
@@ -869,6 +877,7 @@
             </h3>
           </div>
           <button
+            id="sign-in-modal-close-btn"
             class="w-8 h-8 rounded-full flex items-center justify-center border border-primary/15 transition-all hover:border-amber-600/40 text-secondary-text cursor-pointer"
           >
             <i data-lucide="x" class="w-4 h-4"></i>
@@ -1000,6 +1009,7 @@
 
     <script src="./asset/js/script.js"></script>
     <script src="./asset/js/header-menu.js"></script>
+    <script src="./asset/js/sign-in-modal.js"></script>
     <script src="./asset/js/auth/auth.js"></script>
     <script src="./asset/js/product-page-modal.js"></script>
     <script src="./asset/js/shopping-cart.js"></script>
