@@ -59,6 +59,14 @@
 
         <!-- Buttons -->
         <div class="flex items-center justify-center gap-3">
+          <!-- Sign In BTN -->
+          <div
+            class="hidden md:flex items-center justify-center bg-primary/5 text-primary border border-primary/25 gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
+          >
+            <i data-lucide="user" class="w-4 h-4 text-primary"></i>
+            <span>Sign In</span>
+          </div>
+
           <!-- Cart BTN -->
           <div
             id="open-cart-btn"
@@ -82,7 +90,7 @@
           id="mobile-nav"
           class="fixed top-16 bg-background inset-x-0 px-6 py-4 md:hidden border-b border-primary/15 h-0 opacity-0 overflow-hidden transition-all duration-500 -translate-y-52"
         >
-          <ul class="flex flex-col gap-2">
+          <ul class="flex flex-col gap-2 border-b border-primary/15 pb-4">
             <li
               class="flex items-center justify-between px-4 py-3 transition-all text-primary bg-primary/5 rounded-xl cursor-pointer"
             >
@@ -118,6 +126,13 @@
               ></span>
             </li>
           </ul>
+
+          <button
+            class="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all bg-primary/8 text-primary mt-4 cursor-pointer hover:opacity-90 active:scale-95"
+          >
+            <i data-lucide="user" class="w-4 h-4"></i>
+            Sign In / Create Account
+          </button>
         </nav>
       </div>
     </header>
@@ -985,6 +1000,7 @@
 
     <script src="./asset/js/script.js"></script>
     <script src="./asset/js/header-menu.js"></script>
+    <script src="./asset/js/auth/auth.js"></script>
     <script src="./asset/js/product-page-modal.js"></script>
     <script src="./asset/js/shopping-cart.js"></script>
   </body>
