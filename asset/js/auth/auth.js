@@ -1,3 +1,5 @@
+import { showAccessModal } from "../utils.js";
+
 const signInBtn = document.getElementById("sign-in-btn");
 const signInEmail = document.getElementById("sign-in-email");
 const signInPassword = document.getElementById("sign-in-password");
@@ -48,6 +50,7 @@ const signIn = async () => {
     if (findUser) {
       document.cookie = `userId=${findUser.id};path=/;max-age=1209600;`;
       hideSignInModal();
+      showAccessModal("Welcome back!","Good to see you again.")
     }
   }
 };
@@ -91,6 +94,7 @@ const createAccount = async () => {
 
     if (createAccountResponse.status == 201) {
       hideSignInModal();
+      showAccessModal("Account created!","You're all set. Enjoy your visit.")
     }
   }
 };

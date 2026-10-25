@@ -13,3 +13,5 @@ const showAccessModal = (title, description) => {
     accessModal.classList.add("hidden");
   }, 3000);
 };
+
+export { showAccessModal };

@@ -1,3 +1,5 @@
+import { showAccessModal } from "./utils.js";
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const shoppingCartModal = document.getElementById("shopping-cart-modal");
 const shoppingCartContent = document.getElementById("shopping-cart-content");
@@ -594,6 +596,7 @@ const finallyCheckout = async () => {
         cart = [];
         showCurrentOrderProduct();
         hideCheckoutModal();
+        showAccessModal("Order Placed!", "We will deliver it to you soon.");
 
         if (findDeliveryDetail.table_id) {
           fetch(
