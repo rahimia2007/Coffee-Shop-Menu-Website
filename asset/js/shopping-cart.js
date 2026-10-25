@@ -36,7 +36,6 @@ const checkoutFooterProductLength = document.getElementById(
   "checkout-footer-product-length",
 );
 const tax = document.getElementById("tax");
-const pastCheckoutModal = document.getElementById("past-checkout-modal");
 
 let taxAmount = 0;
 
@@ -595,7 +594,6 @@ const finallyCheckout = async () => {
         cart = [];
         showCurrentOrderProduct();
         hideCheckoutModal();
-        showPastCheckoutModal();
 
         if (findDeliveryDetail.table_id) {
           fetch(
@@ -618,14 +616,6 @@ const finallyCheckout = async () => {
       }
     }
   }
-};
-
-const showPastCheckoutModal = () => {
-  pastCheckoutModal.classList.remove("hidden");
-
-  setTimeout(() => {
-    pastCheckoutModal.classList.add("hidden");
-  }, 3000);
 };
 
 const activeCheckoutBtn = () => {
