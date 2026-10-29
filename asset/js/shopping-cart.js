@@ -596,7 +596,11 @@ const finallyCheckout = async () => {
         cart = [];
         showCurrentOrderProduct();
         hideCheckoutModal();
-        showAccessModal("Order Placed!", "We will deliver it to you soon.");
+        showAccessModal(
+          "circle-check-big",
+          "Order Placed!",
+          "We will deliver it to you soon.",
+        );
 
         if (findDeliveryDetail.table_id) {
           fetch(

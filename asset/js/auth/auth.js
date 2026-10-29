@@ -28,8 +28,6 @@ const signIn = async () => {
     emailRejex.test(signInEmailValue) &&
     passwordRejex.test(signInPasswordValue)
   ) {
-    console.log("ok");
-
     const usersResponse = await fetch(
       "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/users?select=*",
       {
@@ -50,7 +48,18 @@ const signIn = async () => {
     if (findUser) {
       document.cookie = `userId=${findUser.id};path=/;max-age=1209600;`;
       hideSignInModal();
-      showAccessModal("Welcome back!","Good to see you again.")
+      showAccessModal(
+        "circle-check-big",
+        "Welcome back!",
+        "Good to see you again.",
+      );
+    } else {
+      hideSignInModal();
+      showAccessModal(
+        "user-x",
+        "Account not found!",
+        "We couldn't find an account matching that email and password. Check your details or create a new account.",
+      );
     }
   }
 };
@@ -94,7 +103,11 @@ const createAccount = async () => {
 
     if (createAccountResponse.status == 201) {
       hideSignInModal();
-      showAccessModal("Account created!","You're all set. Enjoy your visit.")
+      showAccessModal(
+        "circle-check-big",
+        "Account created!",
+        "You're all set. Enjoy your visit.",
+      );
     }
   }
 };
