@@ -3,6 +3,7 @@ import { showAccessModal } from "../utils.js";
 const signInBtn = document.getElementById("sign-in-btn");
 const signInEmail = document.getElementById("sign-in-email");
 const signInPassword = document.getElementById("sign-in-password");
+const signInErrorMessage = document.getElementById("sign-in-error-message");
 
 const createAccountFullName = document.getElementById(
   "create-account-full-name",
@@ -61,6 +62,15 @@ const signIn = async () => {
         "We couldn't find an account matching that email and password. Check your details or create a new account.",
       );
     }
+  } else if (!signInEmailValue || !signInPasswordValue) {
+    signInErrorMessage.classList.remove("hidden");
+    signInErrorMessage.innerHTML = "Please fill in all required fields.";
+  } else if (!emailRejex.test(signInEmailValue)) {
+    signInErrorMessage.classList.remove("hidden");
+    signInErrorMessage.innerHTML = "Please enter the email correctly.";
+  } else if (!passwordRejex.test(signInPasswordValue)) {
+    signInErrorMessage.classList.remove("hidden");
+    signInErrorMessage.innerHTML = "Password must be at least 6 characters.";
   }
 };
 
