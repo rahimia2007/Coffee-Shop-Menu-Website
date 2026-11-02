@@ -8,6 +8,20 @@ const createOneAccountBtn = document.getElementById("create-one-account-btn");
 const signInSection = document.getElementById("sign-in-section");
 const createAccountSection = document.getElementById("create-account-section");
 
+const signInEmail = document.getElementById("");
+const signInPassword = document.getElementById("sign-in-password");
+
+const createAccountFullName = document.getElementById(
+  "create-account-full-name",
+);
+const createAccountEmail = document.getElementById("create-account-email");
+const createAccountPassword = document.getElementById(
+  "create-account-password",
+);
+const createAccountConfirmPassword = document.getElementById(
+  "create-account-confirm-password",
+);
+
 const showSignInModal = () => {
   signInModal.classList.remove("hidden");
 
@@ -27,6 +41,9 @@ const showsignInSection = () => {
 
   signInSection.classList.remove("hidden");
   createAccountSection.classList.add("hidden");
+
+  signInEmail.value = "";
+  signInPassword.value = "";
 };
 
 const showCreateAccountSection = () => {
@@ -37,6 +54,11 @@ const showCreateAccountSection = () => {
 
   createAccountSection.classList.remove("hidden");
   signInSection.classList.add("hidden");
+
+  createAccountFullName.value = "";
+  createAccountEmail.value = "";
+  createAccountPassword.value = "";
+  createAccountConfirmPassword.value = "";
 };
 
 showSignInBtns.forEach((showSignInBtn) => {
