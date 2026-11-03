@@ -1,4 +1,5 @@
 import { showAccessModal } from "../utils.js";
+import { hideSignInModal } from "../sign-in-modal.js";
 
 const signInBtn = document.getElementById("sign-in-btn");
 const signInEmail = document.getElementById("sign-in-email");
@@ -57,6 +58,8 @@ const signIn = async () => {
         "Welcome back!",
         "Good to see you again.",
       );
+
+      location.href = "";
     } else {
       hideSignInModal();
       showAccessModal(

@@ -1,3 +1,5 @@
+import { menuHandler } from "./header-menu.js";
+
 const signInModal = document.getElementById("sign-in-modal");
 const showSignInBtns = document.querySelectorAll("#show-sign-in-btn");
 const signInModalCloseBtn = document.getElementById("sign-in-modal-close-btn");
@@ -42,8 +44,8 @@ const showsignInSection = () => {
   signInSection.classList.remove("hidden");
   createAccountSection.classList.add("hidden");
 
-  signInEmail.value = "";
-  signInPassword.value = "";
+  signInEmail ? (signInEmail.value = "") : null;
+  signInPassword ? (signInPassword.value = "") : null;
 };
 
 const showCreateAccountSection = () => {
@@ -55,10 +57,12 @@ const showCreateAccountSection = () => {
   createAccountSection.classList.remove("hidden");
   signInSection.classList.add("hidden");
 
-  createAccountFullName.value = "";
-  createAccountEmail.value = "";
-  createAccountPassword.value = "";
-  createAccountConfirmPassword.value = "";
+  createAccountFullName ? (createAccountFullName.value = "") : null;
+  createAccountEmail ? (createAccountEmail.value = "") : null;
+  createAccountPassword ? (createAccountPassword.value = "") : null;
+  createAccountConfirmPassword
+    ? (createAccountConfirmPassword.value = "")
+    : null;
 };
 
 showSignInBtns.forEach((showSignInBtn) => {
@@ -69,3 +73,5 @@ signInModalBg.addEventListener("click", hideSignInModal);
 signInTabBtn.addEventListener("click", showsignInSection);
 createAccountTabBtn.addEventListener("click", showCreateAccountSection);
 createOneAccountBtn.addEventListener("click", showCreateAccountSection);
+
+export { hideSignInModal };

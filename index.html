@@ -60,30 +60,43 @@
         <!-- Buttons -->
         <div class="flex items-center justify-center gap-3">
           <!-- Sign In BTN -->
-          <div
+          <button
             id="show-sign-in-btn"
             class="hidden md:flex items-center justify-center bg-primary/5 text-primary border border-primary/25 gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
           >
             <i data-lucide="user" class="w-4 h-4 text-primary"></i>
             <span>Sign In</span>
-          </div>
+          </button>
+
+          <!-- When User Sign In BTN -->
+          <button
+            id="when-user-sign-in-btn"
+            class="hidden items-center justify-center bg-primary/5 text-primary border border-primary/25 gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
+          >
+            <div
+              id="when-user-sign-in-name-first-letter"
+              class="w-6 h-6 bg-primary rounded-full text-background flex items-center justify-center uppercase"
+            ></div>
+            <span id="when-user-sign-in-name"></span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-primary"></i>
+          </button>
 
           <!-- Cart BTN -->
-          <div
+          <button
             id="open-cart-btn"
             class="flex items-center justify-center bg-primary text-background gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
           >
             <i data-lucide="shopping-cart" class="w-4 h-4 text-background"></i>
             <span class="hidden sm:block">Cart</span>
-          </div>
+          </button>
 
           <!-- Menu Mobile Toggle -->
-          <div
+          <button
             id="menu-toggle"
             class="md:hidden size-9 flex items-center justify-center text-secondary-text rounded-xl border border-primary/15 transition-colors cursor-pointer"
           >
             <i data-lucide="menu" class="w-4 h-4"></i>
-          </div>
+          </button>
         </div>
 
         <!-- Mobile Nav Menu -->
@@ -1025,8 +1038,8 @@
     </script>
 
     <script src="./asset/js/script.js"></script>
-    <script src="./asset/js/header-menu.js"></script>
-    <script src="./asset/js/sign-in-modal.js"></script>
+    <script src="./asset/js/header-menu.js" type="module"></script>
+    <script src="./asset/js/sign-in-modal.js" type="module"></script>
     <script src="./asset/js/auth/auth.js" type="module"></script>
     <script src="./asset/js/product-page-modal.js"></script>
     <script src="./asset/js/shopping-cart.js" type="module"></script>

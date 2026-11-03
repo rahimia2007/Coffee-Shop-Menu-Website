@@ -1,5 +1,13 @@
+import { isSignIn } from "./utils.js";
+
 const menuToggle = document.getElementById("menu-toggle");
 const mobileNav = document.getElementById("mobile-nav");
+const showSignInBtns = document.querySelectorAll("#show-sign-in-btn");
+const whenUserSignInBtns = document.querySelectorAll("#when-user-sign-in-btn");
+const whenUserSignInName = document.getElementById("when-user-sign-in-name");
+const whenUserSignInNameFirstLetter = document.getElementById(
+  "when-user-sign-in-name-first-letter",
+);
 
 const menuHandler = () => {
   if (mobileNav.className.includes("opacity-0")) {
@@ -30,4 +38,30 @@ const menuHandler = () => {
   }
 };
 
+window.addEventListener("load", async () => {
+  const signInUserId = isSignIn();
+
+  if (signInUserId) {
+    showSignInBtns[0].classList.remove("md:flex");
+    showSignInBtns[1].classList.add("hidden");
+    whenUserSignInBtns[0].classList.add("md:flex");
+
+    const userResponse = await fetch(
+      `https://bqpbxsyxslyednegacov.supabase.co/rest/v1/users?id=eq.${signInUserId}`,
+      {
+        headers: {
+          apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          Authorization:
+            "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        },
+      },
+    );
+    const user = await userResponse.json();
+    whenUserSignInName.innerHTML = user[0].full_name;
+    whenUserSignInNameFirstLetter.innerHTML = user[0].full_name.slice(0, 1);
+  }
+});
+
 menuToggle.addEventListener("click", menuHandler);
+
+export { menuHandler };

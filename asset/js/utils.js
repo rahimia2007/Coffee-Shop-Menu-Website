@@ -17,4 +17,17 @@ const showAccessModal = (icon, title, description) => {
   }, 3000);
 };
 
-export { showAccessModal };
+const isSignIn = () => {
+  const userIdCookies = document.cookie.split("; ");
+  let userId = null;
+  userIdCookies.some((userIdCookie) => {
+    if (userIdCookie.includes("userId")) {
+      userId = userIdCookie.slice(userIdCookie.indexOf("=") + 1);
+      return true;
+    }
+  });
+
+  return userId;
+};
+
+export { showAccessModal, isSignIn };
