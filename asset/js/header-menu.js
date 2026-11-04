@@ -18,12 +18,14 @@ const userMobileSignInInfo = document.getElementById(
 );
 
 const menuHandler = () => {
+  console.log(mobileNav.className.includes("opacity-0"));
+
   if (mobileNav.className.includes("opacity-0")) {
     mobileNav.classList.remove("opacity-0");
     mobileNav.classList.add("opacity-100");
     mobileNav.classList.remove("h-0");
     mobileNav.classList.add("h-[300px]");
-    mobileNav.classList.remove("-translate-y-52");
+    mobileNav.classList.remove("-translate-y-96");
     mobileNav.classList.add("-translate-x-0");
 
     menuToggle.innerHTML = "";
@@ -36,7 +38,7 @@ const menuHandler = () => {
     mobileNav.classList.remove("opacity-100");
     mobileNav.classList.remove("h-[260px]");
     mobileNav.classList.add("h-0");
-    mobileNav.classList.add("-translate-y-52");
+    mobileNav.classList.add("-translate-y-96");
 
     menuToggle.innerHTML = "";
     menuToggle.innerHTML = `<i data-lucide="menu" class="w-4 h-4"></i> `;
