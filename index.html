@@ -69,17 +69,41 @@
           </button>
 
           <!-- When User Sign In BTN -->
-          <button
-            id="when-user-sign-in-btn"
-            class="hidden items-center justify-center bg-primary/5 text-primary border border-primary/25 gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
-          >
+          <div id="when-user-sign-in-btn" class="hidden relative">
+            <button
+              class="md:flex items-center justify-center bg-primary/5 text-primary border border-primary/25 gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
+            >
+              <div
+                id="when-user-sign-in-name-first-letter"
+                class="w-6 h-6 bg-primary rounded-full text-background flex items-center justify-center uppercase"
+              ></div>
+              <span id="when-user-sign-in-name"></span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-primary"></i>
+            </button>
+
             <div
-              id="when-user-sign-in-name-first-letter"
-              class="w-6 h-6 bg-primary rounded-full text-background flex items-center justify-center uppercase"
-            ></div>
-            <span id="when-user-sign-in-name"></span>
-            <i data-lucide="chevron-down" class="w-4 h-4 text-primary"></i>
-          </button>
+              id="user-sign-in-info"
+              class="hidden absolute top-full right-0 mt-2 z-50 w-52 rounded-2xl border border-primary/15 py-1.5 overflow-hidden bg-elevated-cards shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
+            >
+              <div class="px-4 py-3 border-b border-primary/15">
+                <span
+                  id="user-sign-in-name"
+                  class="text-xs font-semibold truncate text-primary-text block"
+                ></span>
+                <span
+                  id="user-sign-in-email"
+                  class="text-xs truncate text-placeholders block"
+                ></span>
+              </div>
+              <button
+                id="logout-btn"
+                class="w-full flex items-center gap-2.5 px-4 py-3 text-sm text-left transition-all text-[#f87171] hover:scale-95"
+              >
+                <i data-lucide="log-out" class="w-4 h-4"></i>
+                Sign Out
+              </button>
+            </div>
+          </div>
 
           <!-- Cart BTN -->
           <button

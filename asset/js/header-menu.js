@@ -1,4 +1,4 @@
-import { isSignIn } from "./utils.js";
+import { isSignIn, logoutHandler } from "./utils.js";
 
 const menuToggle = document.getElementById("menu-toggle");
 const mobileNav = document.getElementById("mobile-nav");
@@ -8,6 +8,10 @@ const whenUserSignInName = document.getElementById("when-user-sign-in-name");
 const whenUserSignInNameFirstLetter = document.getElementById(
   "when-user-sign-in-name-first-letter",
 );
+const userSignInInfo = document.getElementById("user-sign-in-info");
+const userSignInName = document.getElementById("user-sign-in-name");
+const userSignInEmail = document.getElementById("user-sign-in-email");
+const logoutBtn = document.getElementById("logout-btn");
 
 const menuHandler = () => {
   if (mobileNav.className.includes("opacity-0")) {
@@ -59,7 +63,19 @@ window.addEventListener("load", async () => {
     const user = await userResponse.json();
     whenUserSignInName.innerHTML = user[0].full_name;
     whenUserSignInNameFirstLetter.innerHTML = user[0].full_name.slice(0, 1);
+
+    console.log(user);
+    userSignInName.innerHTML = user[0].full_name;
+    userSignInEmail.innerHTML = user[0].email;
   }
+});
+
+logoutBtn.addEventListener("click", logoutHandler);
+
+whenUserSignInBtns.forEach((whenUserSignInBtn) => {
+  whenUserSignInBtn.addEventListener("click", () => {
+    userSignInInfo.classList.toggle("hidden");
+  });
 });
 
 menuToggle.addEventListener("click", menuHandler);

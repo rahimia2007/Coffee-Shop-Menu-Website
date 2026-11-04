@@ -30,4 +30,8 @@ const isSignIn = () => {
   return userId;
 };
 
-export { showAccessModal, isSignIn };
+const logoutHandler = () => {
+  document.cookie = `userId=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  location.href = "";
+};
+export { showAccessModal, isSignIn, logoutHandler };
