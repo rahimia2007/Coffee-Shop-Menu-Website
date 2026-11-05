@@ -532,9 +532,10 @@ const finallyCheckout = async () => {
     });
 
     if (findDeliveryDetail) {
+      const signInUser = isSignIn();
       // set Orders to server
       const orders = {
-        customer_id: "7cb2db73-8d12-4568-8dda-57eb2a1b224a",
+        customer_id: signInUser,
         delivery_detail_id: findDeliveryDetail.id,
         is_delivered: false,
       };
