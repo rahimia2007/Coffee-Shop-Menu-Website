@@ -1,4 +1,4 @@
-import { showAccessModal } from "./utils.js";
+import { showAccessModal, executeOrLogin } from "./utils.js";
 
 const openCartBtn = document.getElementById("open-cart-btn");
 const shoppingCartModal = document.getElementById("shopping-cart-modal");
@@ -640,9 +640,13 @@ shoppingCartCloseBtn.addEventListener("click", hideShoppingCartModal);
 shoppingCartBg.addEventListener("click", hideShoppingCartModal);
 
 currentOrderBtn.addEventListener("click", showCurrentOrder);
-pastOrdersBtn.addEventListener("click", showPastOrders);
+pastOrdersBtn.addEventListener("click", () => {
+  executeOrLogin(showPastOrders);
+});
 
-proceedCheckoutBtn.addEventListener("click", showCheckoutModal);
+proceedCheckoutBtn.addEventListener("click", () => {
+  executeOrLogin(showCheckoutModal);
+});
 closeCheckoutModalBtn.addEventListener("click", hideCheckoutModal);
 checkoutModalBg.addEventListener("click", hideCheckoutModal);
 dineInBtn.addEventListener("click", changeToDineIn);

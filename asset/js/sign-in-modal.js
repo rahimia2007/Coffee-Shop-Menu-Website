@@ -74,4 +74,4 @@ signInTabBtn.addEventListener("click", showsignInSection);
 createAccountTabBtn.addEventListener("click", showCreateAccountSection);
 createOneAccountBtn.addEventListener("click", showCreateAccountSection);
 
-export { hideSignInModal };
+export { hideSignInModal, showSignInModal };

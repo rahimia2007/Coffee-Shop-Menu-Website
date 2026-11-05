@@ -1,3 +1,5 @@
+import { showSignInModal } from "./sign-in-modal.js";
+
 const accessModal = document.getElementById("access-modal");
 const accessModalIcon = document.getElementById("access-modal-icon");
 const accessModalTitle = document.getElementById("access-modal-title");
@@ -34,4 +36,12 @@ const logoutHandler = () => {
   document.cookie = `userId=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
   location.href = "";
 };
-export { showAccessModal, isSignIn, logoutHandler };
+
+const executeOrLogin = (callback) => {
+  if (isSignIn()) {
+    callback();
+  } else {
+    showSignInModal();
+  }
+};
+export { showAccessModal, isSignIn, logoutHandler, executeOrLogin };
