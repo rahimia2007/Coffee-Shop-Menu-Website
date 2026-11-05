@@ -1,4 +1,4 @@
-import { showAccessModal, executeOrLogin } from "./utils.js";
+import { showAccessModal, executeOrLogin, isSignIn } from "./utils.js";
 
 const openCartBtn = document.getElementById("open-cart-btn");
 const shoppingCartModal = document.getElementById("shopping-cart-modal");
@@ -80,8 +80,9 @@ const showPastOrders = async () => {
   currentOrderBtn.className =
     "flex-1 py-2 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text";
 
+  const signInUser = isSignIn();
   const pastOrdersRes = await fetch(
-    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders?select=*",
+    `https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders?customer_id=eq.${signInUser}`,
     {
       headers: {
         apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
