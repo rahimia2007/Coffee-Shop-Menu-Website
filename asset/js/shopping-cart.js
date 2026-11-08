@@ -217,7 +217,7 @@ const showPastOrders = async () => {
   lucide.createIcons();
 };
 
-const openAccordion = (orderId) => {
+window.openAccordion = (orderId) => {
   const orderContent = document.getElementById(`order-${orderId}`);
   const pastOrderAccordionIcon = document.getElementById(
     `past-order-accordion-icon-${orderId}`,
@@ -237,7 +237,7 @@ const openAccordion = (orderId) => {
   }
 };
 
-const reOrder = (orderProducts) => {
+window.reOrder = (orderProducts) => {
   const missingInCart = orderProducts.filter((orderProduct) => {
     return !cart.some((cartproduct) => {
       return cartproduct.id === orderProduct.id;
@@ -326,7 +326,7 @@ const showCurrentOrderProduct = () => {
   }
 };
 
-const deleteProductFromCart = (productId, productSize) => {
+window.deleteProductFromCart = (productId, productSize) => {
   const findProduct = cart.findIndex((product) => {
     return product.id === productId && productSize === product.size;
   });
@@ -336,7 +336,7 @@ const deleteProductFromCart = (productId, productSize) => {
   showShoppingCartModal();
 };
 
-const increaseNumberProductCart = (productId, productSize) => {
+window.increaseNumberProductCart = (productId, productSize) => {
   const productCartQuantity = document.getElementById(`product-cart-quantity`);
   const findProduct = cart.find((product) => {
     return product.id === productId && productSize === product.size;
@@ -353,7 +353,7 @@ const increaseNumberProductCart = (productId, productSize) => {
   CalculatingTotalPrice();
 };
 
-const reductionNumberProductCart = (productId, productSize) => {
+window.reductionNumberProductCart = (productId, productSize) => {
   const productCartQuantity = document.getElementById(`product-cart-quantity`);
   const findProduct = cart.find((product) => {
     return product.id === productId && productSize === product.size;
