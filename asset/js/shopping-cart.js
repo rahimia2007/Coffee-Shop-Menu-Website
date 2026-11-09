@@ -473,9 +473,10 @@ const showTablesInList = async () => {
 
   dineInInput.innerHTML = "";
 
-  dineInInput.insertAdjacentHTML(
-    "beforeend",
-    `
+  if (emptyTables.length) {
+    dineInInput.insertAdjacentHTML(
+      "beforeend",
+      `
     <option value="" class="text-primary-text border border-primary/15" disabled selected>Select the desired table.</option>
     ${emptyTables
       .map((table) => {
@@ -483,7 +484,13 @@ const showTablesInList = async () => {
       })
       .join("")}
     `,
-  );
+    );
+  } else {
+    dineInInput.insertAdjacentHTML(
+      "beforeend",
+      `<option value="" class="text-primary-text border border-primary/15" disabled selected>There are no empty tables available.</option>`,
+    );
+  }
 };
 
 const finallyCheckout = async () => {
