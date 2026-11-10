@@ -102,9 +102,10 @@ const showPastOrders = async () => {
     },
   );
   const productsPastOrder = await productsPastOrderRes.json();
+
   pastOrdersContent.innerHTML = "";
   let productForReOrder = [];
-  if (productsPastOrder.length) {
+  if (allPastOrders.length) {
     allPastOrders.forEach((order) => {
       pastOrdersContent.insertAdjacentHTML(
         "beforeend",
