@@ -2,27 +2,43 @@ const dayEls = document.querySelectorAll("#day");
 
 const categoriesContainer = document.getElementById("categories-container");
 const bestSellersContainer = document.getElementById("best-sellers-container");
+const openClosedStatusCircle = document.getElementById(
+  "open-closed-status-circle",
+);
+const openClosedStatusText = document.getElementById("open-closed-status-text");
 let products = [];
 
 const weekDaysHandeler = (() => {
-  const weekDaysName = [
-    "Saturday",
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
+  const weekDays = [
+    { name: "Saturday", workingHoursStart: 8, workingHoursEnd: 22 },
+    { name: "Sunday", workingHoursStart: 8, workingHoursEnd: 19 },
+    { name: "Monday", workingHoursStart: 7, workingHoursEnd: 20 },
+    { name: "Tuesday", workingHoursStart: 7, workingHoursEnd: 20 },
+    { name: "Wednesday", workingHoursStart: 7, workingHoursEnd: 21 },
+    { name: "Thursday", workingHoursStart: 7, workingHoursEnd: 21 },
+    { name: "Friday", workingHoursStart: 7, workingHoursEnd: 22 },
   ];
 
   const today = new Date().getDay();
+  const nowTime = new Date().getHours();
 
   dayEls.forEach((day) => {
-    if (day.innerHTML === weekDaysName[today]) {
+    if (day.innerHTML === weekDays[today].name) {
       day.innerHTML += `<span class="ml-2 text-xs font-dmmono opacity-60">(today)</span>`;
       day.className = "text-sm font-medium text-primary";
       const workHoursEls = day.nextElementSibling;
       workHoursEls.className = "text-sm font-dmmono text-primary-text";
+      if (
+        weekDays[today].workingHoursStart < nowTime &&
+        nowTime < weekDays[today].workingHoursEnd
+      ) {
+        openClosedStatusText.innerHTML =
+          "Currently open · We look forward to seeing you";
+        openClosedStatusCircle.classList.remove("bg-[#f87171]");
+        openClosedStatusCircle.classList.add("bg-[#09be4b]");
+        openClosedStatusCircle.classList.remove("shadow-(--about-shadow)");
+        openClosedStatusCircle.classList.add("shadow-(--about-shadow-open)");
+      }
     }
   });
 })();

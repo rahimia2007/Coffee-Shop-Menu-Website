@@ -22,6 +22,7 @@
 
   /* Shadow */
   --about-shadow: rgb(248, 113, 113) 0px 0px 8px;
+  --about-shadow-open: rgb(5,106,42) 0px 0px 8px;
 }
 
 @layer utilities {
