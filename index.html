@@ -1085,6 +1085,35 @@
       </div>
     </div>
 
+    <!-- Loading -->
+    <div
+      class="min-h-screen pt-16 px-6 flex items-center justify-center bg-background fixed inset-0 z-80 hidden"
+    >
+      <div class="flex flex-col items-center text-center">
+        <div class="relative size-20 mb-6">
+          <div
+            class="absolute inset-0 rounded-full border border-primary/15"
+          ></div>
+          <div
+            class="absolute inset-2 rounded-full border border-dashed border-primary animate-spin"
+          ></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <i data-lucide="coffee" class="w-6 h-6 text-primary"></i>
+          </div>
+        </div>
+
+        <h3
+          class="text-xs font-dmmono uppercase tracking-[0.28em] mb-3 text-primary"
+        >
+          Ember & Oak
+        </h3>
+        <span class="text-2xl font-bold mb-2 font-Playfair text-primary-text"
+          >Brewing the menu</span
+        >
+        <p class="text-sm text-placeholders">Just a moment...</p>
+      </div>
+    </div>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>

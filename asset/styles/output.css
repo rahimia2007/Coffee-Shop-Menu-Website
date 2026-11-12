@@ -56,6 +56,7 @@
     --radius-2xl: 1rem;
     --radius-3xl: 1.5rem;
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --animate-spin: spin 1s linear infinite;
     --blur-xs: 4px;
     --blur-sm: 8px;
     --default-transition-duration: 150ms;
@@ -243,6 +244,9 @@
   .inset-0 {
     inset: 0px;
   }
+  .inset-2 {
+    inset: calc(var(--spacing) * 2);
+  }
   .inset-x-0 {
     inset-inline: 0px;
   }
@@ -312,6 +316,9 @@
   .z-10 {
     z-index: 10;
   }
+  .z-30 {
+    z-index: 30;
+  }
   .z-40 {
     z-index: 40;
   }
@@ -320,6 +327,9 @@
   }
   .z-60 {
     z-index: 60;
+  }
+  .z-80 {
+    z-index: 80;
   }
   .container {
     width: 100%;
@@ -460,6 +470,10 @@
     width: calc(var(--spacing) * 12);
     height: calc(var(--spacing) * 12);
   }
+  .size-20 {
+    width: calc(var(--spacing) * 20);
+    height: calc(var(--spacing) * 20);
+  }
   .h-0 {
     height: 0px;
   }
@@ -525,6 +539,9 @@
   }
   .max-h-\[92vh\] {
     max-height: 92vh;
+  }
+  .min-h-screen {
+    min-height: 100vh;
   }
   .w-1 {
     width: var(--spacing);
@@ -631,6 +648,12 @@
   }
   .rotate-180 {
     rotate: 180deg;
+  }
+  .transform {
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .animate-spin {
+    animation: var(--animate-spin);
   }
   .cursor-pointer {
     cursor: pointer;
@@ -794,6 +817,10 @@
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
   }
+  .border-dashed {
+    --tw-border-style: dashed;
+    border-style: dashed;
+  }
   .border-background {
     border-color: var(--color-background);
   }
@@ -836,20 +863,11 @@
   .bg-\[\#09be4b\] {
     background-color: #09be4b;
   }
-  .bg-\[\#056a2a\] {
-    background-color: #056a2a;
-  }
-  .bg-\[\#71f8a3\] {
-    background-color: #71f8a3;
-  }
   .bg-\[\#f87171\] {
     background-color: #f87171;
   }
   .bg-\[\#f87171\]\/15 {
     background-color: color-mix(in oklab, #f87171 15%, transparent);
-  }
-  .bg-\[rgb\(5\,106\,42\)\] {
-    background-color: rgb(5,106,42);
   }
   .bg-background {
     background-color: var(--color-background);
@@ -1127,6 +1145,9 @@
   .pt-6 {
     padding-top: calc(var(--spacing) * 6);
   }
+  .pt-16 {
+    padding-top: calc(var(--spacing) * 16);
+  }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
   }
@@ -1219,6 +1240,10 @@
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
   }
+  .tracking-\[0\.28em\] {
+    --tw-tracking: 0.28em;
+    letter-spacing: 0.28em;
+  }
   .tracking-\[0\.28rem\] {
     --tw-tracking: 0.28rem;
     letter-spacing: 0.28rem;
@@ -1301,14 +1326,6 @@
   }
   .shadow-\(--about-shadow\) {
     --tw-shadow: var(--about-shadow);
-    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .shadow-\(--about-shadow-\) {
-    --tw-shadow: var(--about-shadow-);
-    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .shadow-\(--about-shadow-opem\) {
-    --tw-shadow: var(--about-shadow-opem);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .shadow-\(--about-shadow-open\) {
@@ -1602,7 +1619,7 @@
     padding-inline: calc(var(--spacing) * 6);
   }
   .p {
-    color: #f87171;
+    color: #8a7a6a;
   }
 }
 @property --tw-translate-x {
@@ -1619,6 +1636,26 @@
   syntax: "*";
   inherits: false;
   initial-value: 0;
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
 }
 @property --tw-space-y-reverse {
   syntax: "*";
@@ -1871,12 +1908,22 @@
   inherits: false;
   initial-value: 1;
 }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
       --tw-space-y-reverse: 0;
       --tw-divide-y-reverse: 0;
       --tw-border-style: solid;
