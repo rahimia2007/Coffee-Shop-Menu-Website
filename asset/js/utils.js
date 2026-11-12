@@ -44,4 +44,15 @@ const executeOrLogin = (callback) => {
     showSignInModal();
   }
 };
-export { showAccessModal, isSignIn, logoutHandler, executeOrLogin };
+
+const loadingHandler = () => {
+  const loading = document.getElementById("loading");
+  loading.classList.add("hidden");
+};
+export {
+  showAccessModal,
+  isSignIn,
+  logoutHandler,
+  executeOrLogin,
+  loadingHandler,
+};

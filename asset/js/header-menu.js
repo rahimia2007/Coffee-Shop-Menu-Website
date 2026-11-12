@@ -95,4 +95,3 @@ whenUserSignInBtn.addEventListener("click", () => {
 
 menuToggle.addEventListener("click", menuHandler);
 
-export { menuHandler };

@@ -1,5 +1,3 @@
-import { menuHandler } from "./header-menu.js";
-
 const signInModal = document.getElementById("sign-in-modal");
 const showSignInBtns = document.querySelectorAll("#show-sign-in-btn");
 const signInModalCloseBtn = document.getElementById("sign-in-modal-close-btn");
@@ -27,7 +25,23 @@ const createAccountConfirmPassword = document.getElementById(
 const showSignInModal = () => {
   signInModal.classList.remove("hidden");
 
-  menuHandler();
+  const mobileNav = document.getElementById("mobile-nav");
+
+  if (mobileNav.className.includes("opacity-100")) {
+    mobileNav.classList.add("opacity-0");
+    mobileNav.classList.remove("opacity-100");
+    mobileNav.classList.remove("h-[260px]");
+    mobileNav.classList.add("h-0");
+    mobileNav.classList.add("-translate-y-96");
+
+    menuToggle.innerHTML = "";
+    menuToggle.innerHTML = `<i data-lucide="menu" class="w-4 h-4"></i> `;
+
+    // For convert icons to SVG
+    lucide.createIcons();
+  }
+
+  // menuHandler();
   showsignInSection();
 };
 

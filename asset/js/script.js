@@ -1,3 +1,5 @@
+import { loadingHandler } from "./utils.js";
+
 const dayEls = document.querySelectorAll("#day");
 
 const categoriesContainer = document.getElementById("categories-container");
@@ -126,4 +128,6 @@ window.addEventListener("load", async () => {
       `,
     );
   });
+
+  loadingHandler();
 });
