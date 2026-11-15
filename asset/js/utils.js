@@ -7,6 +7,19 @@ const accessModalDescription = document.getElementById(
   "access-modal-description",
 );
 
+const productFetch = async () => {
+  const productResponse = await fetch(
+    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/products?select=*",
+    {
+      headers: {
+        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+      },
+    },
+  );
+  return await productResponse.json();
+};
+
 const showAccessModal = (icon, title, description) => {
   accessModalIcon.innerHTML = `<i data-lucide=${icon} class='w-8 h-8 text-primary'></i>`;
   lucide.createIcons();
@@ -49,10 +62,24 @@ const loadingHandler = () => {
   const loading = document.getElementById("loading");
   loading.classList.add("hidden");
 };
+
+const getCartFromLocalStorage = () => {
+  const data = JSON.parse(localStorage.getItem("cart"));
+  if (data) {
+    return data;
+  }
+};
+
+const saveCartInLocalStorage = (cart) => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
 export {
+  productFetch,
   showAccessModal,
   isSignIn,
   logoutHandler,
   executeOrLogin,
   loadingHandler,
+  saveCartInLocalStorage,
+  getCartFromLocalStorage,
 };

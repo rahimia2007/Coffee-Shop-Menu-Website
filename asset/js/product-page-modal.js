@@ -1,3 +1,9 @@
+import {
+  productFetch,
+  saveCartInLocalStorage,
+  getCartFromLocalStorage,
+} from "./utils.js";
+
 const productModal = document.getElementById("product-modal");
 const productModalCloseBtn = document.getElementById("product-modal-close");
 const productPageBg = document.getElementById("product-page-bg");
@@ -18,11 +24,13 @@ const addToCartBtn = document.getElementById("add-to-cart-btn");
 const addToCartTotalPrice = document.getElementById("add-to-cart-total-price");
 const sizeBtns = document.querySelectorAll("#size-btn-wrapper button");
 
-let cart = [];
+let cart = getCartFromLocalStorage() ?? [];
 let productSize = "Regular";
 let productIdShow = null;
 
-const showProductModal = (productId) => {
+const products = await productFetch();
+
+window.showProductModal = (productId) => {
   productSize = "Regular";
   productIdShow = productId;
   productModal.classList.remove("hidden");
@@ -75,7 +83,7 @@ const reductionNumberProductPage = () => {
   }
 };
 
-const addToCart = (product) => {
+window.addToCart = (product) => {
   let count = 0;
   const isInCart = cart.some((productInCart) => {
     count = count + 1;
@@ -98,18 +106,7 @@ const addToCart = (product) => {
     };
     cart.push(newProduct);
   }
-  saveCartInLocalStorage();
-};
-
-const saveCartInLocalStorage = () => {
-  localStorage.setItem("cart", JSON.stringify(cart));
-};
-
-const getCartFromLocalStorage = () => {
-  data = JSON.parse(localStorage.getItem("cart"));
-  if (data) {
-    cart = data;
-  }
+  saveCartInLocalStorage(cart);
 };
 
 window.addEventListener("load", getCartFromLocalStorage);
@@ -141,3 +138,4 @@ const showProductCount = () => {
     productPageNumber.textContent = 1;
   }
 };
+export { cart };

@@ -1,4 +1,12 @@
-import { showAccessModal, executeOrLogin, isSignIn } from "./utils.js";
+import {
+  productFetch,
+  showAccessModal,
+  executeOrLogin,
+  isSignIn,
+  saveCartInLocalStorage,
+} from "./utils.js";
+
+import { cart } from "./product-page-modal.js";
 
 const openCartBtn = document.getElementById("open-cart-btn");
 const shoppingCartModal = document.getElementById("shopping-cart-modal");
@@ -39,6 +47,8 @@ const checkoutFooterProductLength = document.getElementById(
 );
 const tax = document.getElementById("tax");
 
+const products = await productFetch();
+
 let taxAmount = 0;
 
 let productLength = 0;
@@ -51,7 +61,7 @@ const showShoppingCartModal = () => {
   shoppingCartContent.classList.add("translate-x-0");
 
   showCurrentOrder();
-  CalculatingTotalPrice();
+  calculatingTotalPrice();
 };
 
 const hideShoppingCartModal = () => {
@@ -247,7 +257,7 @@ window.reOrder = (orderProducts) => {
 
   if (missingInCart.length) {
     cart = [...cart, ...missingInCart];
-    saveCartInLocalStorage();
+    saveCartInLocalStorage(cart);
   }
 };
 
@@ -333,7 +343,7 @@ window.deleteProductFromCart = (productId, productSize) => {
   });
   cart.splice(findProduct, 1);
   showCurrentOrderProduct();
-  saveCartInLocalStorage();
+  saveCartInLocalStorage(cart);
   showShoppingCartModal();
 };
 
@@ -350,8 +360,8 @@ window.increaseNumberProductCart = (productId, productSize) => {
 
   findProduct.quantity = count;
   showCurrentOrderProduct();
-  saveCartInLocalStorage();
-  CalculatingTotalPrice();
+  saveCartInLocalStorage(cart);
+  calculatingTotalPrice();
 };
 
 window.reductionNumberProductCart = (productId, productSize) => {
@@ -367,12 +377,12 @@ window.reductionNumberProductCart = (productId, productSize) => {
 
   findProduct.quantity = count;
   showCurrentOrderProduct();
-  saveCartInLocalStorage();
-  CalculatingTotalPrice();
+  saveCartInLocalStorage(cart);
+  calculatingTotalPrice();
 };
 
-const CalculatingTotalPrice = () => {
-  let totalPrice = 0;
+window.calculatingTotalPrice = () => {
+  totalPrice = 0;
   cart.forEach((product) => {
     totalPrice += product.price * product.quantity;
   });
@@ -603,7 +613,7 @@ const finallyCheckout = async () => {
         });
 
         localStorage.clear();
-        cart = [];
+        cart.splice(0, cart.length);
         showCurrentOrderProduct();
         hideCheckoutModal();
         showAccessModal(

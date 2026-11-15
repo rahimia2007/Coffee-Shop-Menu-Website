@@ -1,4 +1,4 @@
-import { loadingHandler } from "./utils.js";
+import { productFetch, loadingHandler } from "./utils.js";
 
 const dayEls = document.querySelectorAll("#day");
 
@@ -8,7 +8,7 @@ const openClosedStatusCircle = document.getElementById(
   "open-closed-status-circle",
 );
 const openClosedStatusText = document.getElementById("open-closed-status-text");
-let products = [];
+let products = await productFetch();
 
 const weekDaysHandeler = (() => {
   const weekDays = [
@@ -46,17 +46,6 @@ const weekDaysHandeler = (() => {
 })();
 
 window.addEventListener("load", async () => {
-  const productResponse = await fetch(
-    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/products?select=*",
-    {
-      headers: {
-        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-      },
-    },
-  );
-  products = await productResponse.json();
-
   const categoriesResponse = await fetch(
     "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/categories?select=*",
     {

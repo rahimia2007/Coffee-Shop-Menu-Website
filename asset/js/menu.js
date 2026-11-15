@@ -1,20 +1,11 @@
+import { loadingHandler, productFetch } from "./utils.js";
+
 const productContainer = document.getElementById("product-container");
 const categoriesContainer = document.getElementById("categories-container");
 
-let products = null;
+let products = await productFetch();
 
 const fetchHandler = async () => {
-  const productResponse = await fetch(
-    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/products?select=*",
-    {
-      headers: {
-        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-      },
-    },
-  );
-  products = await productResponse.json();
-
   const categoriesResponse = await fetch(
     "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/categories?select=*",
     {
@@ -43,7 +34,7 @@ const fetchHandler = async () => {
   showProduct(findcategory?.id ? findcategory.id : categoriesData[0].id);
 };
 
-const showProduct = (categoryId) => {
+window.showProduct = (categoryId) => {
   productContainer.innerHTML = "";
   const findProducts = products.filter((product) => {
     return product.category_id === categoryId;
@@ -94,6 +85,8 @@ const showProduct = (categoryId) => {
         `,
     );
   });
+
+  loadingHandler();
 };
 
 const showCategories = (categories, categoryId) => {
