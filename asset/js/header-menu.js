@@ -18,8 +18,6 @@ const userMobileSignInInfo = document.getElementById(
 );
 
 const menuHandler = () => {
-  console.log(mobileNav.className.includes("opacity-0"));
-
   if (mobileNav.className.includes("opacity-0")) {
     mobileNav.classList.remove("opacity-0");
     mobileNav.classList.add("opacity-100");
@@ -94,4 +92,3 @@ whenUserSignInBtn.addEventListener("click", () => {
 });
 
 menuToggle.addEventListener("click", menuHandler);
-

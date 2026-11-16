@@ -46,6 +46,8 @@ const weekDaysHandeler = (() => {
 })();
 
 window.addEventListener("load", async () => {
+  loadingHandler();
+
   const categoriesResponse = await fetch(
     "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/categories?select=*",
     {
@@ -88,7 +90,6 @@ window.addEventListener("load", async () => {
     (product) => product.is_best_seller === true,
   );
   bestSellerProducts.forEach((product) => {
-    console.log(product);
     bestSellersContainer.insertAdjacentHTML(
       "beforeend",
       `
@@ -117,6 +118,4 @@ window.addEventListener("load", async () => {
       `,
     );
   });
-
-  loadingHandler();
 });
