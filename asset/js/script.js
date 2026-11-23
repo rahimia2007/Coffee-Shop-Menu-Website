@@ -8,7 +8,6 @@ const openClosedStatusCircle = document.getElementById(
   "open-closed-status-circle",
 );
 const openClosedStatusText = document.getElementById("open-closed-status-text");
-let products = await productFetch();
 
 const weekDaysHandeler = (() => {
   const weekDays = [
@@ -45,28 +44,31 @@ const weekDaysHandeler = (() => {
   });
 })();
 
+let products = [];
 window.addEventListener("load", async () => {
-  loadingHandler();
+  try {
+    products = await productFetch();
 
-  const categoriesResponse = await fetch(
-    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/categories?select=*",
-    {
-      headers: {
-        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+    const categoriesResponse = await fetch(
+      "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/categories?select=*",
+      {
+        headers: {
+          apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          Authorization:
+            "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        },
       },
-    },
-  );
-  const categoriesData = await categoriesResponse.json();
-  let categoriesProduct = [];
+    );
+    const categoriesData = await categoriesResponse.json();
+    let categoriesProduct = [];
 
-  categoriesData.forEach((category) => {
-    categoriesProduct = products.filter((product) => {
-      return category.id === product.category_id;
-    });
-    categoriesContainer.insertAdjacentHTML(
-      "beforeend",
-      `
+    categoriesData.forEach((category) => {
+      categoriesProduct = products.filter((product) => {
+        return category.id === product.category_id;
+      });
+      categoriesContainer.insertAdjacentHTML(
+        "beforeend",
+        `
       <a href="./public/menu.html?category=${category.name.split(" ").join("-")}" class="relative group rounded-2xl overflow-hidden text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl h-56 bg-cards cursor-pointer">
         <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500" src="./asset/img/${category.img_url}" alt="">
         <div class="absolute inset-0 z-5 bg-linear-to-b from-background/0 via-background/18 to-background/88"></div>
@@ -82,17 +84,17 @@ window.addEventListener("load", async () => {
         </div>
       </a>
       `,
-    );
-    categoriesProduct = [];
-  });
+      );
+      categoriesProduct = [];
+    });
 
-  const bestSellerProducts = products.filter(
-    (product) => product.is_best_seller === true,
-  );
-  bestSellerProducts.forEach((product) => {
-    bestSellersContainer.insertAdjacentHTML(
-      "beforeend",
-      `
+    const bestSellerProducts = products.filter(
+      (product) => product.is_best_seller === true,
+    );
+    bestSellerProducts.forEach((product) => {
+      bestSellersContainer.insertAdjacentHTML(
+        "beforeend",
+        `
         <div class="group rounded-2xl overflow-hidden bg-elevated-cards border border-primary/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
           <div class="relative overflow-hidden h-74">
               <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="./asset/img/product-img/${product.image_url}" alt="">
@@ -116,6 +118,9 @@ window.addEventListener("load", async () => {
           </div>
         </div>
       `,
-    );
-  });
+      );
+    });
+  } finally {
+    loadingHandler();
+  }
 });

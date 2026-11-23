@@ -3,35 +3,40 @@ import { loadingHandler, productFetch } from "./utils.js";
 const productContainer = document.getElementById("product-container");
 const categoriesContainer = document.getElementById("categories-container");
 
-let products = await productFetch();
-
+let products = [];
 const fetchHandler = async () => {
-  const categoriesResponse = await fetch(
-    "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/categories?select=*",
-    {
-      headers: {
-        apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        Authorization: "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+  try {
+    products = await productFetch();
+    const categoriesResponse = await fetch(
+      "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/categories?select=*",
+      {
+        headers: {
+          apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+          Authorization:
+            "Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+        },
       },
-    },
-  );
-  const categoriesData = await categoriesResponse.json();
+    );
+    const categoriesData = await categoriesResponse.json();
 
-  const selectedCategory = location.search
-    .replace("?", "")
-    .split("-")
-    .join(" ")
-    .split("=")[1];
+    const selectedCategory = location.search
+      .replace("?", "")
+      .split("-")
+      .join(" ")
+      .split("=")[1];
 
-  const findcategory = await categoriesData.find((category) => {
-    return category.name === selectedCategory;
-  });
+    const findcategory = await categoriesData.find((category) => {
+      return category.name === selectedCategory;
+    });
 
-  showCategories(
-    categoriesData,
-    findcategory?.id ? findcategory.id : categoriesData[0].id,
-  );
-  showProduct(findcategory?.id ? findcategory.id : categoriesData[0].id);
+    showCategories(
+      categoriesData,
+      findcategory?.id ? findcategory.id : categoriesData[0].id,
+    );
+    showProduct(findcategory?.id ? findcategory.id : categoriesData[0].id);
+  } finally {
+    loadingHandler();
+  }
 };
 
 window.showProduct = (categoryId) => {
@@ -85,8 +90,6 @@ window.showProduct = (categoryId) => {
         `,
     );
   });
-
-  loadingHandler();
 };
 
 const showCategories = (categories, categoryId) => {
