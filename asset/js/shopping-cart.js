@@ -155,7 +155,7 @@ const showPastOrders = async () => {
                       return (totalPrice +=
                         productOrder.unit_price * productOrder.quantity);
                     }
-                    return totalPrice;
+                    return totalPrice.toFixed(2);
                   }, 0)}
               </span>
               <i
@@ -386,7 +386,7 @@ window.calculatingTotalPrice = () => {
   cart.forEach((product) => {
     totalPrice += product.price * product.quantity;
   });
-  totalPriceEl.textContent = `$${totalPrice}`;
+  totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
 };
 
 const showCheckoutModal = () => {
@@ -400,17 +400,17 @@ const showCheckoutModal = () => {
 
   cart.forEach((product) => {
     productLength += +product.quantity;
-    totalPrice += product.price;
+    totalPrice += +product.price * +product.quantity;
   });
   checkoutHeaderProductLength.innerHTML = `
     ${productLength} item ·
-    <span class="font-dmmono text-primary">$${totalPrice}</span>`;
+    <span class="font-dmmono text-primary">$${totalPrice.toFixed(2)}</span>`;
 
-  checkoutFooterProductPrice.innerHTML = `$${totalPrice}`;
+  checkoutFooterProductPrice.innerHTML = `$${totalPrice.toFixed(2)}`;
 
   checkoutFooterProductLength.innerHTML = `${productLength} item`;
 
-  checkoutBtn.innerHTML = `Place Order · $${totalPrice - (totalPrice * taxAmount) / 100}`;
+  checkoutBtn.innerHTML = `Place Order · $${(totalPrice - (totalPrice * taxAmount) / 100).toFixed(2)}`;
 
   showTablesInList();
 };
@@ -442,7 +442,7 @@ const changeToDineIn = () => {
 
   tax.innerHTML = `Incl. ${taxAmount}% tax`;
 
-  checkoutBtn.innerHTML = `Place Order · $${totalPrice - (totalPrice * taxAmount) / 100}`;
+  checkoutBtn.innerHTML = `Place Order · $${(totalPrice - (totalPrice * taxAmount) / 100).toFixed(2)}`;
 };
 
 const changeToTakeout = () => {
@@ -463,7 +463,7 @@ const changeToTakeout = () => {
 
   tax.innerHTML = `Incl. ${taxAmount}% packaging fee`;
 
-  checkoutBtn.innerHTML = `Place Order · $${totalPrice - (totalPrice * taxAmount) / 100}`;
+  checkoutBtn.innerHTML = `Place Order · $${(totalPrice - (totalPrice * taxAmount) / 100).toFixed(2)}`;
 
   // To return to the default value
   showTablesInList();
