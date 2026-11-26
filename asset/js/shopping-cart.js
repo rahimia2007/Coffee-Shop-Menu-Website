@@ -504,6 +504,13 @@ const showTablesInList = async () => {
   }
 };
 
+const l = async () => {
+  let deliveryDetails = {
+    table_id: "c0cc737a-d5e3-4db1-9ac7-12bd9b25ab30",
+  };
+};
+l();
+
 const finallyCheckout = async () => {
   let deliveryDetails = null;
   if (takeoutInput.value.trim() || dineInInput.value) {
@@ -514,7 +521,7 @@ const finallyCheckout = async () => {
     }
 
     // set Delivery Details to server
-    await fetch(
+    const newDeliveryDetailsRes = await fetch(
       "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/delivery_details",
       {
         method: "POST",
@@ -523,73 +530,44 @@ const finallyCheckout = async () => {
           Authorization:
             " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
           "Content-Type": "application/json",
-          Prefer: "return=minimal",
+          Prefer: "return=representation",
         },
         body: JSON.stringify(deliveryDetails),
       },
     );
 
-    const newDeliveryDetailsRes = await fetch(
-      "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/delivery_details",
-      {
-        headers: {
-          apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-          Authorization:
-            " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-        },
-      },
-    );
+    const [newDeliveryDetails] = await newDeliveryDetailsRes.json();
 
-    const newDeliveryDetails = await newDeliveryDetailsRes.json();
-    const findDeliveryDetail = newDeliveryDetails.find((findDeliveryDetail) => {
-      return (
-        findDeliveryDetail.delivery_address ===
-          deliveryDetails.delivery_address ||
-        findDeliveryDetail.table_id === deliveryDetails.table_id
-      );
-    });
-
-    if (findDeliveryDetail) {
+    if (newDeliveryDetails) {
       const signInUser = isSignIn();
       // set Orders to server
       const orders = {
         customer_id: signInUser,
-        delivery_detail_id: findDeliveryDetail.id,
+        delivery_detail_id: newDeliveryDetails.id,
         is_delivered: false,
       };
-      await fetch("https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders", {
-        method: "POST",
-        headers: {
-          apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-          Authorization:
-            " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
-          "Content-Type": "application/json",
-          Prefer: "return=minimal",
-        },
-        body: JSON.stringify(orders),
-      });
-
       const newOrdersRes = await fetch(
         "https://bqpbxsyxslyednegacov.supabase.co/rest/v1/orders",
         {
+          method: "POST",
           headers: {
             apikey: "sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
             Authorization:
               " Bearer sb_publishable_ktxKs7HPRQ2TLuXndm9hAg_Ls6AAIjJ",
+            "Content-Type": "application/json",
+            Prefer: "return=representation",
           },
+          body: JSON.stringify(orders),
         },
       );
 
-      const newOrders = await newOrdersRes.json();
-      const findOrder = newOrders.find((newOrder) => {
-        return newOrder.delivery_detail_id === findDeliveryDetail.id;
-      });
+      const [newOrders] = await newOrdersRes.json();
 
-      if (findOrder) {
+      if (newOrders) {
         // add Cart Product to server
         cart.forEach(async (product) => {
           const newProduct = {
-            order_id: findOrder.id,
+            order_id: newOrders.id,
             product_id: product.id,
             quantity: +product.quantity,
             size: product.size,
@@ -622,9 +600,9 @@ const finallyCheckout = async () => {
           "We will deliver it to you soon.",
         );
 
-        if (findDeliveryDetail.table_id) {
+        if (newDeliveryDetails.table_id) {
           fetch(
-            `https://bqpbxsyxslyednegacov.supabase.co/rest/v1/tables?id=eq.${findDeliveryDetail.table_id}`,
+            `https://bqpbxsyxslyednegacov.supabase.co/rest/v1/tables?id=eq.${newDeliveryDetails.table_id}`,
             {
               method: "PATCH",
               headers: {
