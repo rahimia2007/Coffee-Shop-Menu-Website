@@ -59,6 +59,52 @@
 
         <!-- Buttons -->
         <div class="flex items-center justify-center gap-3">
+          <!-- Sign In BTN -->
+          <button
+            id="show-sign-in-btn"
+            class="hidden md:flex items-center justify-center bg-primary/5 text-primary border border-primary/25 gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
+          >
+            <i data-lucide="user" class="w-4 h-4 text-primary"></i>
+            <span>Sign In</span>
+          </button>
+
+          <!-- When User Sign In BTN -->
+          <div id="when-user-sign-in-btn" class="hidden relative">
+            <button
+              class="md:flex items-center justify-center bg-primary/5 text-primary border border-primary/25 gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-85 hover:scale-95 cursor-pointer"
+            >
+              <div
+                id="when-user-sign-in-name-first-letter"
+                class="w-6 h-6 bg-primary rounded-full text-background flex items-center justify-center uppercase"
+              ></div>
+              <span id="when-user-sign-in-name"></span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-primary"></i>
+            </button>
+
+            <div
+              id="user-sign-in-info"
+              class="hidden absolute top-full right-0 mt-2 z-50 w-52 rounded-2xl border border-primary/15 py-1.5 overflow-hidden bg-elevated-cards shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
+            >
+              <div class="px-4 py-3 border-b border-primary/15">
+                <span
+                  id="user-sign-in-name"
+                  class="text-xs font-semibold truncate text-primary-text block"
+                ></span>
+                <span
+                  id="user-sign-in-email"
+                  class="text-xs truncate text-placeholders block"
+                ></span>
+              </div>
+              <button
+                id="logout-btn"
+                class="w-full flex items-center gap-2.5 px-4 py-3 text-sm text-left text-[#f87171] transition-opacity hover:opacity-70"
+              >
+                <i data-lucide="log-out" class="w-4 h-4"></i>
+                Sign Out
+              </button>
+            </div>
+          </div>
+
           <!-- Cart BTN -->
           <div
             id="open-cart-btn"
@@ -118,6 +164,41 @@
               <span class="w-1.5 h-1.5 rounded-full bg-primary block"></span>
             </li>
           </ul>
+
+          <button
+            id="show-sign-in-btn"
+            class="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all bg-primary/8 text-primary mt-4 cursor-pointer hover:opacity-90 active:scale-95"
+          >
+            <i data-lucide="user" class="w-4 h-4"></i>
+            Sign In / Create Account
+          </button>
+
+          <div id="user-mobile-sign-in-info" class="hidden mt-2 pt-3 px-4">
+            <div class="flex items-center gap-2.5 mb-3">
+              <div
+                id="when-user-sign-in-name-first-letter"
+                class="size-7 bg-primary rounded-full text-background flex items-center justify-center text-xs font-bold font-dmmono uppercase"
+              ></div>
+              <div>
+                <span
+                  id="user-sign-in-name"
+                  class="text-sm font-medium truncate text-primary-text block"
+                ></span>
+                <span
+                  id="user-sign-in-email"
+                  class="text-xs truncate text-placeholders block"
+                ></span>
+              </div>
+            </div>
+
+            <button
+              id="logout-btn"
+              class="flex items-center gap-2 text-sm text-[#f87171] transition-opacity hover:opacity-70"
+            >
+              <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+              Sign Out
+            </button>
+          </div>
         </nav>
       </div>
     </header>
@@ -376,6 +457,121 @@
       </div>
     </footer>
 
+    <!-- Product Page Modal -->
+    <div
+      id="product-modal"
+      class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden"
+    >
+      <div
+        id="product-page-bg"
+        class="absolute inset-0 bg-background/82 backdrop-blur-sm"
+      ></div>
+
+      <div
+        class="relative z-10 rounded-3xl overflow-x-hidden w-full max-w-2xl max-h-[92vh] border border-primary/22 bg-elevated-cards"
+      >
+        <div class="relative h-64 md:h-80 bg-cards">
+          <img
+            id="product-page-img"
+            class="w-full h-full object-cover"
+            src="../asset/img/espresso.jpg"
+            alt=""
+          />
+          <div
+            class="absolute inset-0 bg-linear-to-b from-transparent to-elevated-cards"
+          ></div>
+          <span
+            class="absolute top-4 left-4 text-xs text-background bg-primary font-dmmono px-2.5 py-1 rounded-full font-medium"
+            >Best Seller</span
+          >
+          <button
+            id="product-modal-close"
+            class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center border border-white/20 text-white bg-background/65 backdrop-blur-sm hover:bg-background/80 transition-colors cursor-pointer"
+          >
+            <i data-lucide="x" class="w-4 h-4 text-white"></i>
+          </button>
+        </div>
+
+        <div class="p-6 md:p-7">
+          <div class="flex justify-between items-start mb-3">
+            <h3
+              id="product-page-title"
+              class="text-3xl text-primary-text font-Playfair font-bold leading-tight"
+            >
+              Espresso Romano
+            </h3>
+            <span
+              id="product-page-price"
+              class="font-dmmono text-xl text-primary font-bold shrink-0 ml-4"
+              >$4.50</span
+            >
+          </div>
+
+          <p
+            id="product-page-description"
+            class="text-sm text-secondary-text leading-relaxed mb-7"
+          >
+            A bold shot of single-origin espresso with a twist of lemon zest.
+            Bright, clean, and intensely aromatic.
+          </p>
+
+          <div class="mb-5">
+            <span
+              class="text-xs text-placeholders font-dmmono uppercase tracking-wider mb-2.5 block"
+              >Size</span
+            >
+            <div id="size-btn-wrapper" class="grid grid-cols-3 gap-2">
+              <button
+                class="py-2.5 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text cursor-pointer"
+              >
+                Small
+              </button>
+              <button
+                class="py-2.5 rounded-xl text-sm font-medium transition-all bg-primary text-background cursor-pointer"
+              >
+                Regular
+              </button>
+              <button
+                class="py-2.5 rounded-xl text-sm font-medium transition-all bg-cards text-secondary-text cursor-pointer"
+              >
+                Large
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3 rounded-xl px-1.5 bg-cards">
+              <button
+                id="product-page-reduction-btn"
+                class="w-8 h-10 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
+              >
+                <i data-lucide="minus" class="w-3.5 h-3.5"></i>
+              </button>
+              <span
+                id="product-page-number"
+                class="font-mono text-sm font-bold w-4 text-center text-primary-text"
+                >1</span
+              >
+              <button
+                id="product-page-increase-btn"
+                class="w-8 h-10 flex items-center justify-center transition-opacity hover:opacity-60 text-secondary-text cursor-pointer"
+              >
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <button
+              id="add-to-cart-btn"
+              class="flex-1 py-3.5 rounded-xl font-semibold text-sm transition-all hover:opacity-90 active:scale-95 bg-primary text-background"
+            >
+              Add to Cart · $
+              <span id="add-to-cart-total-price">5.00</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Shopping Cart -->
     <div class="invisible pointer-events-none" id="shopping-cart-modal">
       <div
@@ -547,11 +743,15 @@
           <div class="rounded-xl p-4 border bg-cards border-primary/15">
             <div class="flex justify-between text-sm">
               <span class="text-secondary-text">Order total</span>
-              <span class="font-dmmono font-bold text-primary">$7.07</span>
+              <span
+                id="checkout-footer-product-price"
+                class="font-dmmono font-bold text-primary"
+                >$7.07</span
+              >
             </div>
             <div class="flex justify-between text-xs mt-1 text-placeholders">
-              <span>1 item</span>
-              <span>Incl. 8.75% tax</span>
+              <span id="checkout-footer-product-length">1 item</span>
+              <span id="tax">Incl. 0% tax</span>
             </div>
           </div>
 
@@ -565,9 +765,9 @@
       </div>
     </div>
 
-    <!-- Past Checkout -->
+    <!-- Access modal -->
     <div
-      id="past-checkout-modal"
+      id="access-modal"
       class="fixed inset-0 z-60 p-4 flex items-center justify-center hidden"
     >
       <div
@@ -577,18 +777,216 @@
         class="relative z-10 rounded-3xl overflow-hidden w-full max-w-md border border-primary/15 bg-elevated-cards flex flex-col items-center justify-center py-16 px-8 text-center"
       >
         <div
+          id="access-modal-icon"
           class="w-16 h-16 rounded-full flex items-center justify-center mb-5 bg-primary/15"
         >
           <i data-lucide="circle-check-big" class="w-8 h-8 text-primary"></i>
         </div>
 
-        <h3 class="text-2xl font-bold mb-2 font-Playfair text-primary-text">
-          Order Placed!
-        </h3>
+        <h3
+          id="access-modal-title"
+          class="text-2xl font-bold mb-2 font-Playfair text-primary-text"
+        ></h3>
 
-        <p class="text-sm tex-secondary-text">
-          We will deliver it to you soon.
-        </p>
+        <p id="access-modal-description" class="text-sm tex-secondary-text"></p>
+      </div>
+    </div>
+
+    <!-- Sign In & Create Account -->
+    <div
+      id="sign-in-modal"
+      class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden"
+    >
+      <div
+        id="sign-in-modal-bg"
+        class="absolute inset-0 bg-background/82 backdrop-blur-sm"
+      ></div>
+
+      <div
+        class="relative z-10 rounded-3xl overflow-hidden w-full max-w-sm border border-primary/15 bg-elevated-cards"
+      >
+        <div
+          class="flex items-center justify-between px-6 py-5 border-b border-primary/15"
+        >
+          <div class="flex items-center gap-2">
+            <div
+              class="size-7 rounded-lg flex items-center justify-center bg-primary"
+            >
+              <i data-lucide="coffee" class="w-3.5 h-3.5 text-background"></i>
+            </div>
+            <h3 class="text-base text-primary-text font-bold font-Playfair">
+              Ember & Oak
+            </h3>
+          </div>
+          <button
+            id="sign-in-modal-close-btn"
+            class="w-8 h-8 rounded-full flex items-center justify-center border border-primary/15 transition-all hover:border-amber-600/40 text-secondary-text cursor-pointer"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="flex gap-2 px-5 pt-5 shrink-0">
+          <button
+            id="sign-in-tab-btn"
+            class="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all bg-primary text-background"
+          >
+            Sign In
+          </button>
+          <button
+            id="create-account-tab-btn"
+            class="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all bg-cards text-secondary-text"
+          >
+            Create Account
+          </button>
+        </div>
+
+        <!-- Sign In -->
+        <div id="sign-in-section" class="px-5 pt-5 pb-6 space-y-3">
+          <h4
+            class="text-xs font-dmmono uppercase tracking-wider mb-2 text-placeholders"
+          >
+            Email
+          </h4>
+          <input
+            id="sign-in-email"
+            type="email"
+            placeholder="you@example.com"
+            class="w-full px-4 py-3 rounded-xl text-sm text-primary-text bg-cards outline-none border border-primary/15 transition-colors focus:border-amber-600/60 placeholder:opacity-40"
+          />
+          <h4
+            class="text-xs font-dmmono uppercase tracking-wider mb-2 text-placeholders"
+          >
+            Password
+          </h4>
+          <input
+            id="sign-in-password"
+            type="password"
+            placeholder="Min. 6 characters"
+            class="w-full px-4 py-3 rounded-xl text-sm text-primary-text bg-cards outline-none border border-primary/15 transition-colors focus:border-amber-600/60 placeholder:opacity-40"
+          />
+
+          <!-- Error Message -->
+          <p
+            id="sign-in-error-message"
+            class="text-xs py-2.5 px-3.5 rounded-xl text-[#f87171] bg-[#f87171]/15 hidden"
+          >
+            Please fill in all required fields.
+          </p>
+
+          <button
+            id="sign-in-btn"
+            class="w-full py-3.5 rounded-xl font-semibold text-sm transition-all hover:opacity-90 mt-1 active:scale-95 text-background bg-primary"
+          >
+            Sign In
+          </button>
+
+          <p class="text-center text-xs pt-1 text-placeholders">
+            No account?
+            <button
+              id="create-one-account-btn"
+              class="underline underline-offset-2 transition-colors hover:opacity-80 text-primary text-base"
+            >
+              Create one
+            </button>
+          </p>
+        </div>
+
+        <!-- Create Account -->
+        <div
+          id="create-account-section"
+          class="px-5 pt-5 pb-6 space-y-3 hidden"
+        >
+          <h4
+            class="text-xs font-dmmono uppercase tracking-wider mb-2 text-placeholders"
+          >
+            Full Name
+          </h4>
+          <input
+            id="create-account-full-name"
+            type="text"
+            placeholder="Maya Chen"
+            class="w-full px-4 py-3 rounded-xl text-sm text-primary-text bg-cards outline-none border border-primary/15 transition-colors focus:border-amber-600/60 placeholder:opacity-40"
+          />
+          <h4
+            class="text-xs font-dmmono uppercase tracking-wider mb-2 text-placeholders"
+          >
+            Email
+          </h4>
+          <input
+            id="create-account-email"
+            type="email"
+            placeholder="you@example.com"
+            class="w-full px-4 py-3 rounded-xl text-sm text-primary-text bg-cards outline-none border border-primary/15 transition-colors focus:border-amber-600/60 placeholder:opacity-40"
+          />
+          <h4
+            class="text-xs font-dmmono uppercase tracking-wider mb-2 text-placeholders"
+          >
+            Password
+          </h4>
+          <input
+            id="create-account-password"
+            type="password"
+            placeholder="Min. 6 characters"
+            class="w-full px-4 py-3 rounded-xl text-sm text-primary-text bg-cards outline-none border border-primary/15 transition-colors focus:border-amber-600/60 placeholder:opacity-40"
+          />
+          <h4
+            class="text-xs font-dmmono uppercase tracking-wider mb-2 text-placeholders"
+          >
+            Confirm Password
+          </h4>
+          <input
+            id="create-account-confirm-password"
+            type="password"
+            placeholder="Repeat password"
+            class="w-full px-4 py-3 rounded-xl text-sm text-primary-text bg-cards outline-none border border-primary/15 transition-colors focus:border-amber-600/60 placeholder:opacity-40"
+          />
+
+          <!-- Error Message -->
+          <p
+            id="create-account-error-message"
+            class="text-xs py-2.5 px-3.5 rounded-xl text-[#f87171] bg-[#f87171]/15 hidden"
+          >
+            Please fill in all required fields.
+          </p>
+
+          <button
+            id="create-account-btn"
+            class="w-full py-3.5 rounded-xl font-semibold text-sm transition-all hover:opacity-90 mt-1 active:scale-95 text-background bg-primary"
+          >
+            Create Account
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div
+      id="loading"
+      class="min-h-screen pt-16 px-6 flex items-center justify-center bg-background fixed inset-0 z-80"
+    >
+      <div class="flex flex-col items-center text-center">
+        <div class="relative size-20 mb-6">
+          <div
+            class="absolute inset-0 rounded-full border border-primary/15"
+          ></div>
+          <div
+            class="absolute inset-2 rounded-full border border-dashed border-primary animate-spin"
+          ></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <i data-lucide="coffee" class="w-6 h-6 text-primary"></i>
+          </div>
+        </div>
+
+        <h3
+          class="text-xs font-dmmono uppercase tracking-[0.28em] mb-3 text-primary"
+        >
+          Ember & Oak
+        </h3>
+        <span class="text-2xl font-bold mb-2 font-Playfair text-primary-text"
+          >Brewing the menu</span
+        >
+        <p class="text-sm text-placeholders">Just a moment...</p>
       </div>
     </div>
 
@@ -598,10 +996,14 @@
       lucide.createIcons();
     </script>
 
-    <script src="../asset/js/header-menu.js"></script>
-    <script>
-      let cart = JSON.parse(localStorage.getItem("cart"));
+    <script type="module">
+      import { loadingHandler } from "../asset/js/utils.js";
+      window.addEventListener("load", loadingHandler());
     </script>
-    <script src="../asset/js/shopping-cart.js"></script>
+    <script src="../asset/js/header-menu.js" type="module"></script>
+    <script src="../asset/js/sign-in-modal.js" type="module"></script>
+    <script src="../asset/js/auth/auth.js" type="module"></script>
+    <script src="../asset/js/product-page-modal.js" type="module"></script>
+    <script src="../asset/js/shopping-cart.js" type="module"></script>
   </body>
 </html>
